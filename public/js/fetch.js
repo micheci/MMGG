@@ -15,7 +15,7 @@ function getRegion(){
     region=document.getElementById("regions").value;
     regionURL=regions[region]
 }
-console.log(region)
+
 
 function searchSummoner(){
     summonerName=document.getElementById("summonerName").value;
@@ -44,5 +44,13 @@ async function data(){
     let picID=dataSummonerFull.profileIconId;
     let profilePicURL="http://ddragon.leagueoflegends.com/cdn/13.6.1/img/profileicon/"+picID+'.png';
     document.getElementById("summoner_pic").src=profilePicURL;
+
+    //Summoner wins/lose
+    let winLost_url='https://'+ regionURL+'/lol/league/v4/entries/by-summoner/'+dataSummonerFull.id+'?api_key='+API_key;
+    console.log(winLost_url)
+    let rankedInfo=await fetch(winLost_url);
+    let rankedInfoFull=await rankedInfo.json();
+    console.log(rankedInfoFull[0].wins)
+
 
 }
