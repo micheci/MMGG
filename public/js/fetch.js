@@ -30,7 +30,7 @@ async function data(){
     console.log(fullURL)
     const dataSummoner1=await fetch(fullURL);
     const dataSummonerFull=await dataSummoner1.json();
-    console.log(dataSummonerFull)
+    // console.log(dataSummonerFull)
 
     //Summoner Name
     let name=dataSummonerFull.name;
@@ -47,10 +47,28 @@ async function data(){
 
     //Summoner wins/lose
     let winLost_url='https://'+ regionURL+'/lol/league/v4/entries/by-summoner/'+dataSummonerFull.id+'?api_key='+API_key;
-    console.log(winLost_url)
     let rankedInfo=await fetch(winLost_url);
     let rankedInfoFull=await rankedInfo.json();
-    console.log(rankedInfoFull[0].wins)
+    console.log(rankedInfoFull)
+    let rankedwins=rankedInfoFull[0].wins;
+    let rankedLoss=rankedInfoFull[0].losses; 
+    let rankedTier=rankedInfoFull[0].tier;
+    let rankedRank=rankedInfoFull[0].rank;
+    let rankedLP=rankedInfoFull[0].leaguePoints;
+    console.log(rankedLP)
+    console.log(rankedRank)
+
+    let winrate=Math.round((rankedwins/(rankedwins+rankedLoss))*1000/10)
+    console.log(winrate)
+
+    document.getElementById('wins').innerHTML=rankedwins;
+    document.getElementById('losses').innerHTML=rankedLoss;
+    document.getElementById('tier').innerHTML=rankedTier;
+    document.getElementById('rank').innerHTML=rankedRank;
+    document.getElementById('LP').innerHTML=rankedLP;
+    document.getElementById('winrate').innerHTML="winrate:"+winrate;
+
+
 
 
 }
