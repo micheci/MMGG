@@ -1,4 +1,4 @@
-let API_key="RGAPI-9f54b52b-714b-4d46-a472-fb3f7b158286"
+let API_key="RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -67,8 +67,11 @@ async function data(){
     document.getElementById('rank').innerHTML=rankedRank;
     document.getElementById('LP').innerHTML=rankedLP;
     document.getElementById('winrate').innerHTML="winrate:"+winrate;
-
-
+console.log(region)
+    // Get list of matches
+    //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
+    let matchList='https://'+ regionURL+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.id+'/ids?start=0&count=10&api_key='+API_key;
+    console.log(matchList)
 
 
 }
