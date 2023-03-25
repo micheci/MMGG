@@ -1,4 +1,4 @@
-let API_key="RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e"
+let API_key="RGAPI-9197a89e-575c-40e5-bb01-b00670d05d23"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -23,17 +23,22 @@ function searchSummoner(){
     getRegion();
     data();
 }
-
+// DEAL WITH HOW TO DEAL WITH SUMMONER NOT FOUND
 async function data(){
+    //getting URL to get summoner via name search
     let URL="/lol/summoner/v4/summoners/by-name/"+summonerName;
     let fullURL="https://"+regionURL+URL+"?api_key="+API_key;
-    if(!fullURL){
-        console.log('error')
-    }
+    
+
     console.log(fullURL)
     const dataSummoner1=await fetch(fullURL);
+    // console.log(typeof dataSummoner1.status)
+    // if(typeof dataSummoner1.status !== undefined) {return 'retuerns wokrds'}
     const dataSummonerFull=await dataSummoner1.json();
     // console.log(dataSummonerFull)
+    if (dataSummoner1.status !== 200) {
+        console.log('user not exist')
+    } 
 
     //Summoner Name
     let name=dataSummonerFull.name;
