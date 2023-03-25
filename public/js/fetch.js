@@ -27,6 +27,9 @@ function searchSummoner(){
 async function data(){
     let URL="/lol/summoner/v4/summoners/by-name/"+summonerName;
     let fullURL="https://"+regionURL+URL+"?api_key="+API_key;
+    if(!fullURL){
+        console.log('error')
+    }
     console.log(fullURL)
     const dataSummoner1=await fetch(fullURL);
     const dataSummonerFull=await dataSummoner1.json();
@@ -50,6 +53,9 @@ async function data(){
     let rankedInfo=await fetch(winLost_url);
     let rankedInfoFull=await rankedInfo.json();
     console.log(rankedInfoFull)
+    if (!rankedInfoFull){
+        console.log('no existe')
+    }
     let rankedwins=rankedInfoFull[0].wins;
     let rankedLoss=rankedInfoFull[0].losses; 
     let rankedTier=rankedInfoFull[0].tier;
@@ -68,10 +74,41 @@ async function data(){
     document.getElementById('LP').innerHTML=rankedLP;
     document.getElementById('winrate').innerHTML="winrate:"+winrate;
 console.log(region)
-    // Get list of matches
+    let regionNumber=Number(region)
+    // Get list of matches, have to check region and use designeted routing value
+    //Amerias=NA,BR,LAN,LAS
+    //Asia=KR,JP
+    //EUROPe=EUN,EUW,TR,RU
+
+    //if region==0,5,6,7 ->NA
+    //if 3,4 ->Asia
+    //if 1,2,9,10->eu
+    //else ->sea
+
+    let routingRegion=getRegionRoute(region);
+
+    console.log(regionNumber)
+    console.log(routingRegion)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
-    let matchList='https://'+ regionURL+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.id+'/ids?start=0&count=10&api_key='+API_key;
+    let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=10&api_key='+API_key;
     console.log(matchList)
 
 
+}
+
+function getRegionRoute(regionNumber){
+    let routingRegion="";
+    if(regionNumber=='0'||regionNumber=='5'||regionNumber=='6'||regionNumber=='7'){
+        routingRegion='americas.api.riotgames.com';
+    }
+    else if(regionNumber=='3'||regionNumber=='4'){
+        routingRegion='asia.api.riotgames.com';
+    }
+    else if(regionNumber=='2'||regionNumber=='3'||regionNumber=='4'){
+        routingRegion='europe.api.riotgames.com';
+    }
+    else{
+        routingRegion='sea.api.riotgames.com';
+    }
+    return routingRegion;
 }
