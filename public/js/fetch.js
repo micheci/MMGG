@@ -1,4 +1,4 @@
-let API_key="RGAPI-9197a89e-575c-40e5-bb01-b00670d05d23"
+let API_key="RGAPI-a3e5325a-ce05-4936-8c95-665d766d3044"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -31,14 +31,14 @@ async function data(){
     
 
     console.log(fullURL)
-    const dataSummoner1=await fetch(fullURL);
-    // console.log(typeof dataSummoner1.status)
-    // if(typeof dataSummoner1.status !== undefined) {return 'retuerns wokrds'}
+    try{
+    const dataSummoner1=await fetch(fullURL); 
     const dataSummonerFull=await dataSummoner1.json();
-    // console.log(dataSummonerFull)
-    if (dataSummoner1.status !== 200) {
-        console.log('user not exist')
-    } 
+
+    console.log(dataSummonerFull)
+    
+
+    
 
     //Summoner Name
     let name=dataSummonerFull.name;
@@ -97,6 +97,16 @@ console.log(region)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
     let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=10&api_key='+API_key;
     console.log(matchList)
+    }
+    catch(e){
+        document.getElementById("error").innerHTML="summoner not found,try another name or chance region"
+        console.log('summoner not found,try another name or chance region'
+        )
+    }
+    // console.log(typeof dataSummoner1.status)
+    // if(typeof dataSummoner1.status !== undefined) {return 'retuerns wokrds'}
+   
+     
 
 
 }
