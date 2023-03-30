@@ -23,23 +23,18 @@ function searchSummoner(){
     getRegion();
     data();
 }
+
 // DEAL WITH HOW TO DEAL WITH SUMMONER NOT FOUND
 async function data(){
     //getting URL to get summoner via name search
     let URL="/lol/summoner/v4/summoners/by-name/"+summonerName;
     let fullURL="https://"+regionURL+URL+"?api_key="+API_key;
-    
-
     console.log(fullURL)
+
     try{
     const dataSummoner1=await fetch(fullURL); 
     const dataSummonerFull=await dataSummoner1.json();
-
     console.log(dataSummonerFull)
-    
-
-    
-
     //Summoner Name
     let name=dataSummonerFull.name;
     document.getElementById("summoner_name").innerHTML=name
@@ -64,6 +59,7 @@ async function data(){
     let rankedwins=rankedInfoFull[0].wins;
     let rankedLoss=rankedInfoFull[0].losses; 
     let rankedTier=rankedInfoFull[0].tier;
+    // Check for what kind of tier it is then return pictuere
     let rankedRank=rankedInfoFull[0].rank;
     let rankedLP=rankedInfoFull[0].leaguePoints;
     console.log(rankedLP)
@@ -97,18 +93,13 @@ console.log(region)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
     let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=10&api_key='+API_key;
     console.log(matchList)
+    getTierPic(rankedTier);
     }
     catch(e){
         document.getElementById("error").innerHTML="summoner not found,try another name or chance region"
         console.log('summoner not found,try another name or chance region'
         )
     }
-    // console.log(typeof dataSummoner1.status)
-    // if(typeof dataSummoner1.status !== undefined) {return 'retuerns wokrds'}
-   
-     
-
-
 }
 
 function getRegionRoute(regionNumber){
@@ -126,4 +117,10 @@ function getRegionRoute(regionNumber){
         routingRegion='sea.api.riotgames.com';
     }
     return routingRegion;
+}
+
+//function to show pic tier
+function getTierPic(Tier){
+    let tierName=Tier
+    console.log(tierName)
 }

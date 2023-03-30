@@ -8,16 +8,15 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="js/fetch.js"></script>
     <link rel="stylesheet" href="../js/css/index.css">
+    
 
 </head>
-<body>
+<body >
      <h1 class="text-2xl">MMGG</h1>
-    
-     <img id="summoner_pic" src="" alt="summoner pic">
 
-    <div class="md:container md:mx-auto  flex border justify-center border-black ">
+    <div class="md:container md:mx-auto rounded flex border justify-center border-black ">
 
-        <div class="grid   ">
+        <div class="grid ">
         <label for="regionMenu decoration-black">Region</label>
         <select name="regions" id="regions">
             <option value="0">Brazil</option>
@@ -38,32 +37,45 @@
     </div>
    
     <div class="grid flex-1 w-64">
-    <label for="summonerName">Summoner Name:</label>
-    <input  class="flex-1 w-64" type="text" id="summonerName"/>
-</div>
+        <label for="summonerName">Summoner Name:</label>
+        <input  class="flex-1 w-64" type="text" id="summonerName"/>
+    </div>
 
     <label for="searchSummoner"></label>
     <button class="rounded bg-blue-500 border border-blue-700" onclick="searchSummoner()">Search Summoner</button>
+    </div>
 
-    <div id="summoner_name"></div>
-    <div id="summoner_level"></div>
+    <!-- Pic --> <!-- Name/level -->
+    <div class="md:container md:mx-auto border ">
+        <div class="flex">
+            <img class="w-24" id="summoner_pic" src="../js/images/riotLogo.jpg" alt="summoner pic">
+            <div class="pl-6" id="summoner_name">Summoner Name</div>
+        </div>
+        <div class="pl-8 " id="summoner_level">3</div> 
+    </div>
 
-
+    <!-- Region -->
     
-    <div id="regionPicked"></div>   
-</div>
+    
+    <!-- <div id="regionPicked"></div> -->
 
     <div id="error"></div>
 
-    <!-- Wins loss -->
-    <h3>Wins:<div id="wins"></div></h3>
-    <h3>Loses:<div id="losses"></div></h3>
+  
 
     <!-- Tier/rank/lp -->
     <h3>Tier:<div id="tier"></div></h3>
     <h3>Rank:<div id="rank"></div></h3>
     <h3>LP:<div id="LP"></div></h3>
     <div id="winrate"></div>
+
+
+    <!-- Wins loss -->
+    <div class="container">
+        <h3>Wins:<div id="wins"></div></h3>
+        <h3>Loses:<div id="losses"></div></h3>
+    </div>
+
 
 
    
