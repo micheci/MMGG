@@ -1,4 +1,4 @@
-let API_key="RGAPI-a3e5325a-ce05-4936-8c95-665d766d3044"
+let API_key="RGAPI-97fbd296-774c-4633-9fa5-7cc56730ec37"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
