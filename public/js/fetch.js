@@ -1,4 +1,4 @@
-let API_key="RGAPI-97fbd296-774c-4633-9fa5-7cc56730ec37"
+let API_key="RGAPI-0b2d653b-6394-4376-9987-29563365669f"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -73,7 +73,7 @@ async function data(){
     document.getElementById('tier').innerHTML=rankedTier;
     document.getElementById('rank').innerHTML=rankedRank;
     document.getElementById('LP').innerHTML=rankedLP;
-    document.getElementById('winrate').innerHTML="winrate:"+winrate;
+    document.getElementById('winrate').innerHTML=winrate+'%';
 console.log(region)
     let regionNumber=Number(region)
     // Get list of matches, have to check region and use designeted routing value
@@ -92,8 +92,19 @@ console.log(region)
     console.log(routingRegion)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
     let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=10&api_key='+API_key;
-    console.log(matchList)
+    let matchInfo=await fetch(matchList);
+    let matchInfoFull=await matchInfo.json();
+    console.log(matchInfoFull)
+    //place url into matchID
+    getMatchInfo(matchInfoFull)
+    //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
+
+
+
+
     getTierPic(rankedTier);
+
+
     }
     catch(e){
         document.getElementById("error").innerHTML="summoner not found,try another name or chance region"
@@ -130,5 +141,40 @@ function getTierPic(Tier){
         let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/silver.png?image=q_auto,f_webp,w_144&v=1680060873700";
     document.getElementById("tier_pic").src=RankPicURL;
     }
-    console.log(tierName)
+    else if(tierName=="BRONZE"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/bronze.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="IRON"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/iron.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="GOLD"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/gold.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="PLATINUM"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/platinum.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="DIAMOND"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/diamond.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="GRANDMASTER"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/grandmaster.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="CHALLENGER"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/challenger.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+   
+}
+
+function getMatchInfo(data){
+    //fetch data from each past 10 games
+    //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
+    let soloMatchData="https://americas.api.riotgames.com/lol/match/v5/matches/"
+    data.forEach(element=>console.log("https://americas.api.riotgames.com/lol/match/v5/matches/"+ element))
 }
