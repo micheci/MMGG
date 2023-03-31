@@ -121,6 +121,14 @@ function getRegionRoute(regionNumber){
 
 //function to show pic tier
 function getTierPic(Tier){
-    let tierName=Tier
+    let tierName=Tier;
+    if(tierName=="MASTER"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/master.png?image=q_auto,f_webp,w_144&v=1680060873716";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
+    else if(tierName=="SILVER"){
+        let RankPicURL="https://opgg-static.akamaized.net/images/medals_new/silver.png?image=q_auto,f_webp,w_144&v=1680060873700";
+    document.getElementById("tier_pic").src=RankPicURL;
+    }
     console.log(tierName)
 }
