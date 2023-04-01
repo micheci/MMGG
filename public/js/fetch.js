@@ -96,7 +96,7 @@ console.log(region)
     let matchInfoFull=await matchInfo.json();
     console.log(matchInfoFull)
     //place url into matchID
-    getMatchInfo(matchInfoFull)
+    getMatchInfo(matchInfoFull,API_key)
     //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
 
 
@@ -172,9 +172,18 @@ function getTierPic(Tier){
    
 }
 
-function getMatchInfo(data){
+//need to check region routing aswell only working for NA right now
+async function getMatchInfo(matchListURL,API_KEY){
     //fetch data from each past 10 games
-    //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
-    let soloMatchData="https://americas.api.riotgames.com/lol/match/v5/matches/"
-    data.forEach(element=>console.log("https://americas.api.riotgames.com/lol/match/v5/matches/"+ element))
+//https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618?api_key=RGAPI-0b2d653b-6394-4376-9987-29563365669f
+    
+    let url='https://americas.api.riotgames.com/lol/match/v5/matches/'
+    for(let i=0;i<matchListURL.length;i++){
+        let matchInfo=await fetch(url+matchListURL[i]+'?api_key='+API_KEY);
+        let matchInfoFull=await matchInfo.json();
+        //make it so that it gets the participents, won/loss, kills/deaths/assits of searched summoner
+        console.log(matchInfoFull)
+    }
+  
+        
 }
