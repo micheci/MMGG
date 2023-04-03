@@ -1,4 +1,4 @@
-let API_key="RGAPI-0b2d653b-6394-4376-9987-29563365669f"
+let API_key="RGAPI-3757a5bb-c78a-4958-9712-e34b1ae6c3d4"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -91,14 +91,15 @@ console.log(region)
     console.log(regionNumber)
     console.log(routingRegion)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
-    let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=10&api_key='+API_key;
+    let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=5&api_key='+API_key;
     let matchInfo=await fetch(matchList);
     let matchInfoFull=await matchInfo.json();
     console.log(matchInfoFull)
     //place url into matchID
-    getMatchInfo(matchInfoFull,API_key)
+    let getMatchInfoResults=getMatchInfo(matchInfoFull,API_key)
     //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
 
+    await getNamesByID(getMatchInfoResults)
 
 
 
@@ -174,6 +175,7 @@ function getTierPic(Tier){
 
 //need to check region routing aswell only working for NA right now
 async function getMatchInfo(matchListURL,API_KEY){
+    let names=[]
     //fetch data from each past 10 games
 //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618?api_key=RGAPI-0b2d653b-6394-4376-9987-29563365669f
     
@@ -181,9 +183,20 @@ async function getMatchInfo(matchListURL,API_KEY){
     for(let i=0;i<matchListURL.length;i++){
         let matchInfo=await fetch(url+matchListURL[i]+'?api_key='+API_KEY);
         let matchInfoFull=await matchInfo.json();
+        let matchInfoFull1=matchInfoFull.metadata
         //make it so that it gets the participents, won/loss, kills/deaths/assits of searched summoner
-        console.log(matchInfoFull)
-    }
-  
-        
+        console.log(matchInfoFull1)
+        for(let j=0;j<=9;j++){
+            names.push(matchInfoFull1.participants[j] )     
+             
+        }
+    }  console.log(names) 
+        return names 
+} 
+//SAVED ALL IDS TO NAME VARIABLE NOW TO CRETE FUCNITON TO CALL FETCH ON ID'S AND GET NAMES
+ function getNamesByID(names){
+   
+    console.log(names)
+   
 }
+   
