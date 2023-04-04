@@ -1,4 +1,4 @@
-let API_key="RGAPI-3757a5bb-c78a-4958-9712-e34b1ae6c3d4"
+let API_key="RGAPI-93e1c4f6-8a5c-46ee-9125-7d7e2b0a154f"
 let summonerName=""
 let NAregion="https://na1.api.riotgames.com"
 let region="";
@@ -11,13 +11,13 @@ let regions=['br1.api.riotgames.com','eun1.api.riotgames.com'
 ]
 
 //get Region
-function getRegion(){
+async function getRegion(){
     region=document.getElementById("regions").value;
     regionURL=regions[region]
 }
 
 
-function searchSummoner(){
+async function searchSummoner(){
     summonerName=document.getElementById("summonerName").value;
     console.log(summonerName);
     getRegion();
@@ -86,20 +86,26 @@ console.log(region)
     //if 1,2,9,10->eu
     //else ->sea
 
-    let routingRegion=getRegionRoute(region);
+    let routingRegion=await getRegionRoute(region);
 
+    //plug routing numer into fetch URL for matchList
     console.log(regionNumber)
     console.log(routingRegion)
     //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=10&api_key=RGAPI-1a00a867-c6c1-4e57-8958-83ea2d39fa7e
     let matchList='https://'+ routingRegion+'/lol/match/v5/matches/by-puuid/'+dataSummonerFull.puuid+'/ids?start=0&count=5&api_key='+API_key;
     let matchInfo=await fetch(matchList);
     let matchInfoFull=await matchInfo.json();
-    console.log(matchInfoFull)
-    //place url into matchID
-    let getMatchInfoResults=getMatchInfo(matchInfoFull,API_key)
-    //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
+    console.log(matchInfoFull)//List of matches
 
-    await getNamesByID(getMatchInfoResults)
+
+  //place url into matchID
+    let getMatchInfoResults=await getMatchInfo(matchInfoFull,API_key)
+//https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618
+  
+
+    
+
+    await getNamesByID(getMatchInfoResults,API_key)
 
 
 
@@ -174,14 +180,14 @@ function getTierPic(Tier){
 }
 
 //need to check region routing aswell only working for NA right now
-async function getMatchInfo(matchListURL,API_KEY){
+async function getMatchInfo(matchListURL,API_key){
     let names=[]
-    //fetch data from each past 10 games
+    //fetch data from each past 5 games
 //https://americas.api.riotgames.com/lol/match/v5/matches/NA1_4617014618?api_key=RGAPI-0b2d653b-6394-4376-9987-29563365669f
     
     let url='https://americas.api.riotgames.com/lol/match/v5/matches/'
-    for(let i=0;i<matchListURL.length;i++){
-        let matchInfo=await fetch(url+matchListURL[i]+'?api_key='+API_KEY);
+      for(let i=0;i<matchListURL.length;i++){
+        let matchInfo=await fetch(url+matchListURL[i]+'?api_key='+API_key);
         let matchInfoFull=await matchInfo.json();
         let matchInfoFull1=matchInfoFull.metadata
         //make it so that it gets the participents, won/loss, kills/deaths/assits of searched summoner
@@ -190,13 +196,25 @@ async function getMatchInfo(matchListURL,API_KEY){
             names.push(matchInfoFull1.participants[j] )     
              
         }
-    }  console.log(names) 
+    }  
         return names 
 } 
+
+
 //SAVED ALL IDS TO NAME VARIABLE NOW TO CRETE FUCNITON TO CALL FETCH ON ID'S AND GET NAMES
- function getNamesByID(names){
-   
-    console.log(names)
+ async function getNamesByID(names,API_key){
+
+
+    for(let i=0;i<names.length;i++){
+        let url='https://americas.api.riotgames.com/riot/account/v1/accounts/by-puuid/'+names[i]+'?api_key='+API_key
+        console.log(url)
+
+        //   let summonernames=await fetch(url)
+        //   let summonernamesResult=await summonernames.json();
+        //   console.log(summonernamesResult])
+       
+         
+    }
    
 }
    
