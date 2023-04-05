@@ -203,15 +203,15 @@ async function getMatchInfo(matchListURL,API_key){
 
 //SAVED ALL IDS TO NAME VARIABLE NOW TO CRETE FUCNITON TO CALL FETCH ON ID'S AND GET NAMES
  async function getNamesByID(names,API_key){
-
+    //names is a array of strings and API is the api key
 
     for(let i=0;i<names.length;i++){
         let url='https://americas.api.riotgames.com/riot/account/v1/accounts/by-puuid/'+names[i]+'?api_key='+API_key
         console.log(url)
 
-        //   let summonernames=await fetch(url)
-        //   let summonernamesResult=await summonernames.json();
-        //   console.log(summonernamesResult])
+           let summonernames=await fetch(url)
+           let summonernamesResult=await summonernames.json();
+          console.log(summonernamesResult)
        
          
     }
