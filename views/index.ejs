@@ -61,13 +61,14 @@
   
     <img src="<%= profilePicURL %>" alt="Profile Pic">
     
-
+    <% if (rankedInfoFull[0]) { %>
     <%= rankedInfoFull[0].queueType %>
     <%= rankedInfoFull[0].tier %>
     <%= rankedInfoFull[0].rank %>
     <%= rankedInfoFull[0].leaguePoints %>
     <%= rankedInfoFull[0].wins %>
     <%= rankedInfoFull[0].losses %>
+    <% } %>
 
 
 

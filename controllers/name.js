@@ -8,8 +8,9 @@ module.exports = {
   getSummonerName: async (req, res) => {
     try {
         let name=req.body.SummonerName
-        let API_key="RGAPI-7727157a-0ef2-4222-8c4d-dc7b76a47a9f"
-        let url='https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
+        let valueRegion=req.body.selectpicker
+        let API_key="RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040"
+        let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
         const SummonerNameurlFull=await SummonerNameurl1.json();
@@ -18,27 +19,31 @@ module.exports = {
         //get Pic
         let picID=SummonerNameurlFull.profileIconId
         let profilePicURL="http://ddragon.leagueoflegends.com/cdn/13.6.1/img/profileicon/"+picID+'.png';
-        console.log(profilePicURL)
-
-        //regionSelector
-        let regions=['br1.api.riotgames.com','eun1.api.riotgames.com'
-        ,'euw1.api.riotgames.com','jp1.api.riotgames.com','kr.api.riotgames.com'
-        ,'la1.api.riotgames.com','la2.api.riotgames.com','na1.api.riotgames.com','oc1.api.riotgames.com'
-        ,'tr1.api.riotgames.com','ru.api.riotgames.com','ph2.api.riotgames.com',
-        'sg2.api.riotgames.com','th2.api.riotgames.com','tw2.api.riotgames.com']
-        valueRegion=req.body.selectpicker
-        console.log(valueRegion)
-
-        //Get winrates
-        //https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/_h28nu-QHYA4fc1Rgazl8PQWBpR93eHFj1eSIbbOFlri5KSd?api_key=RGAPI-93e1c4f6-8a5c-46ee-9125-7d7e2b0a154f
+        //Summoner ID
         let id=SummonerNameurlFull.id
-        let winLost_url='https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/'+id+'?api_key='+API_key;
+        //get win/loss/tier/rank & LP
+        let winLost_url='https://'+valueRegion+'/lol/league/v4/entries/by-summoner/'+id+'?api_key='+API_key;
+        console.log(winLost_url)
         const rankedInfo=await fetch(winLost_url);
         const rankedInfoFull=await rankedInfo.json();
         console.log(rankedInfoFull)
 
+        //Get routing regions
+        let routingRegion=''
+        if (valueRegion=='br1.api.riotgames.com'||valueRegion=='la2.api.riotgames.com'||valueRegion=='la1.api.riotgames.com'||valueRegion=='na1.api.riotgames.com'){
+            routingRegion='americas.api.riotgames.com'
+        }
+        else if(valueRegion=='kr.api.riotgames.com'||valueRegion=='jp1.api.riotgames.com'){
+            routingRegion='asia.api.riotgames.com'
+        }
+        else if(valueRegion=='europe.api.riotgames.com'||valueRegion=='euw1.api.riotgames.com'||valueRegion=='ru.api.riotgames.com'||valueRegion=='	tr1.api.riotgames.com'){
+            routingRegion='europe.api.riotgames.com'
+        }
+        else routingRegion='sea.api.riotgames.com'
 
-
+//https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=5&api_key=RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040 
+let matchListUrl='https://'+routingRegion+'/lol/match/v5/matches/by-puuid/'+ SummonerNameurlFull.puuid+'/ids?start=0&count=5&api_key='+API_key     
+console.log(matchListUrl)
         
 
 
