@@ -9,7 +9,7 @@ module.exports = {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040"
+        let API_key="RGAPI-946c8434-e008-4a53-8aca-f28a87577eb8"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -41,15 +41,46 @@ module.exports = {
         }
         else routingRegion='sea.api.riotgames.com'
 
-//https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=5&api_key=RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040 
-let matchListUrl='https://'+routingRegion+'/lol/match/v5/matches/by-puuid/'+ SummonerNameurlFull.puuid+'/ids?start=0&count=5&api_key='+API_key     
-console.log(matchListUrl)
+        //get list of matches via ID
+        //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=5&api_key=RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040 
+        let matchListUrl='https://'+routingRegion+'/lol/match/v5/matches/by-puuid/'+ SummonerNameurlFull.puuid+'/ids?start=0&count=2&api_key='+API_key     
+        //console.log(matchListUrl)
+        const matchListUrlFull=await fetch(matchListUrl);
+        const matchListUrlFull1=await matchListUrlFull.json();
+        console.log(matchListUrlFull1)
+
+        //get players   
+        let NameofPlayers=[];
+        NameofPlayers=await getNames(matchListUrlFull1,routingRegion,API_key,valueRegion);
+        console.log(NameofPlayers)
+        
+        async function getNames(matchListUrlFull1,routingRegion){
+            let list=[]
+            for(let i=0;i<matchListUrlFull1.length;i++){
+                let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key
+               
+                const matchDataListFull=await fetch(matchDataList);
+             const matchDataListFull1=await matchDataListFull.json();
+             //console.log(matchDataListFull1)
+                
+             let participants=matchDataListFull1.metadata.participants
+             console.log(participants)
+                for(let j=0;j<20;j++){
+                    let individualMatchIdurl= 'https://'+valueRegion+'/lol/summoner/v4/summoners/by-puuid/'+participants[j]+'?api_key='+API_key;
+            
+                    const individualMatchIdurlFull=await fetch(individualMatchIdurl);
+                    const individualMatchIdurl1=await individualMatchIdurlFull.json();
+                    list.push(individualMatchIdurl1.name)
+                    //console.log(individualMatchIdurl1)
+                        }
+    
+                }return list
+        }
         
 
-
-
+            
       res.render("index.ejs", { name:name,SummonerNameurlFull:SummonerNameurlFull,profilePicURL:profilePicURL,
-        rankedInfoFull:rankedInfoFull});
+        rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers});
     } catch (err) {
       console.log(err);
     }
