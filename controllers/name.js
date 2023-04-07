@@ -9,7 +9,7 @@ module.exports = {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-946c8434-e008-4a53-8aca-f28a87577eb8"
+        let API_key="RGAPI-131f53dc-f188-4930-a6fb-5afdc2c0656d"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -47,35 +47,30 @@ module.exports = {
         //console.log(matchListUrl)
         const matchListUrlFull=await fetch(matchListUrl);
         const matchListUrlFull1=await matchListUrlFull.json();
-        console.log(matchListUrlFull1)
+        //console.log(matchListUrlFull1)
 
         //get players   
         let NameofPlayers=[];
         NameofPlayers=await getNames(matchListUrlFull1,routingRegion,API_key,valueRegion);
-        console.log(NameofPlayers)
-        
+    
         async function getNames(matchListUrlFull1,routingRegion){
             let list=[]
             for(let i=0;i<matchListUrlFull1.length;i++){
-                let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key
-               
+                let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key             
                 const matchDataListFull=await fetch(matchDataList);
-             const matchDataListFull1=await matchDataListFull.json();
-             //console.log(matchDataListFull1)
-                
-             let participants=matchDataListFull1.metadata.participants
-             console.log(participants)
-                for(let j=0;j<20;j++){
+                const matchDataListFull1=await matchDataListFull.json();  
+                let participants=matchDataListFull1.metadata.participants
+             
+                for(let j=0;j<participants.length;j++){
                     let individualMatchIdurl= 'https://'+valueRegion+'/lol/summoner/v4/summoners/by-puuid/'+participants[j]+'?api_key='+API_key;
-            
                     const individualMatchIdurlFull=await fetch(individualMatchIdurl);
                     const individualMatchIdurl1=await individualMatchIdurlFull.json();
                     list.push(individualMatchIdurl1.name)
                     //console.log(individualMatchIdurl1)
                         }
-    
                 }return list
         }
+       
         
 
             
