@@ -26,7 +26,10 @@ module.exports = {
         console.log(winLost_url)
         const rankedInfo=await fetch(winLost_url);
         const rankedInfoFull=await rankedInfo.json();
-        console.log(rankedInfoFull)
+
+        // if rankedInfoFull.tier[0]
+        
+        console.log(rankedInfoFull[0].tier)
 
         //Get routing regions
         let routingRegion=''
