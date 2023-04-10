@@ -9,7 +9,7 @@ module.exports = {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-a69b974d-bc8b-4eba-a305-fa383059aa60"
+        let API_key="RGAPI-db797416-a41f-4b3c-b731-19284e7f19ff"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -52,11 +52,14 @@ module.exports = {
         const matchListUrlFull1=await matchListUrlFull.json();
         //console.log(matchListUrlFull1)
 
+
         //get players   
         let NameofPlayers=[];
         NameofPlayers=await getNames(matchListUrlFull1,routingRegion,API_key,valueRegion);
-        await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
+        let participantsPicsID=[]
+        participantsPicsID=await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
         
+     
     
         async function getNames(matchListUrlFull1,routingRegion){
             let list=[]
@@ -77,18 +80,22 @@ module.exports = {
                 }return list
         }
        async function getParticipantsPics(matchListUrlFull1,routingRegion){
-        //let participantsPicsID=[]
+        
         let results=[]
           for(let i=0;i<matchListUrlFull1.length;i++){
             let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key             
             const matchDataListFull=await fetch(matchDataList);
             const matchDataListFull1=await matchDataListFull.json(); 
-            let participantsPicsID=matchDataListFull1.info.participants[0]
-            console.log(participantsPicsID)
+             participantsPicsID=matchDataListFull1.info
+             //navigate through all the participants
+             for(let j=0;j<10;j++){
+              console.log(participantsPicsID['participants'][j]['championId'])
+             }
+            
 
             
           }
-          // Add variable to store data for champs used
+           return participantsPicsID
         
         }
         
