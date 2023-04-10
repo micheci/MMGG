@@ -9,7 +9,7 @@ module.exports = {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-131f53dc-f188-4930-a6fb-5afdc2c0656d"
+        let API_key="RGAPI-a69b974d-bc8b-4eba-a305-fa383059aa60"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -55,15 +55,18 @@ module.exports = {
         //get players   
         let NameofPlayers=[];
         NameofPlayers=await getNames(matchListUrlFull1,routingRegion,API_key,valueRegion);
+        await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
+        
     
         async function getNames(matchListUrlFull1,routingRegion){
             let list=[]
             for(let i=0;i<matchListUrlFull1.length;i++){
                 let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key             
                 const matchDataListFull=await fetch(matchDataList);
-                const matchDataListFull1=await matchDataListFull.json();  
+                const matchDataListFull1=await matchDataListFull.json(); 
+                
                 let participants=matchDataListFull1.metadata.participants
-             
+            
                 for(let j=0;j<participants.length;j++){
                     let individualMatchIdurl= 'https://'+valueRegion+'/lol/summoner/v4/summoners/by-puuid/'+participants[j]+'?api_key='+API_key;
                     const individualMatchIdurlFull=await fetch(individualMatchIdurl);
@@ -73,6 +76,22 @@ module.exports = {
                         }
                 }return list
         }
+       async function getParticipantsPics(matchListUrlFull1,routingRegion){
+        //let participantsPicsID=[]
+        let results=[]
+          for(let i=0;i<matchListUrlFull1.length;i++){
+            let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key             
+            const matchDataListFull=await fetch(matchDataList);
+            const matchDataListFull1=await matchDataListFull.json(); 
+            let participantsPicsID=matchDataListFull1.info.participants[0]
+            console.log(participantsPicsID)
+
+            
+          }
+          // Add variable to store data for champs used
+        
+        }
+        
        
         
 

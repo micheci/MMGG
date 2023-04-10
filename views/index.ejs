@@ -52,39 +52,60 @@
     </div>
     </form>
     
-    <div class="profileInfomd:container md:mx-auto rounded flex border justify-center border-black">
-      <%= SummonerNameurlFull.name %>
-      <h3><%= SummonerNameurlFull.summonerLevel %></h3>
-    </div>
+   
   
 
-    <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic">
+    
    
 
     <!-- Need tier pic,rank,tier,winloss in one place -->
 
-    <div class="md:container md:mx-auto rounded flex border justify-left border-black">
-      <img class="h-24 w-24 rounded-lg" id='tier_pic' src="" alt="Tier pic">
-      <div class="flex 	flex-col">
+    <div class="md:container md:mx-auto rounded flex border border-black pt-4">
+      <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
+      <div class="flex flex-col flex-1 ">   
       <% if (rankedInfoFull[0]) { %>
-        <%= rankedInfoFull[0].queueType %>
-        <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
-        <%= rankedInfoFull[0].rank %>
-        <%= rankedInfoFull[0].leaguePoints %>
-        <%= rankedInfoFull[0].wins %>
-        <%= rankedInfoFull[0].losses %>
+        <h6 ><%= rankedInfoFull[0].queueType %></h6>
+        <div class="flex flex-row">
+          <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
+          <span><%= rankedInfoFull[0].rank %></span> 
+         </div>
+        <div class="flex flex-col justify-right ">
+        <h6 >LP: <%= rankedInfoFull[0].leaguePoints %></h6>
+        <h6 >Wins: <%= rankedInfoFull[0].wins %></h6>
+        <h6 >Losses: <%= rankedInfoFull[0].losses %></h6>
         <% } %>
+        </div> 
+      </div>
+      <div class="flex flex-col pr-4">
+        <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic">
+        <div class="flex flex-col name_level">
+        <%= SummonerNameurlFull.name %>
+        <h3><%= SummonerNameurlFull.summonerLevel %></h3></div>
       </div>
     </div>
   
 
 
-    
-    <ul>
-      <% for(var i=0; i<NameofPlayers.length; i++) {%>
+    <div class="md:container md:mx-auto border border-black  flex flex-row">
+      <!-- Add champ used, scoreline,win loss -->
+      <img src="" alt="champUsed">
+      <ul class="flex-1 participants">
+        
+        
+        <% for(var i=0; i<10; i++) {%>
+
+          <li ><%= NameofPlayers[i] %></li>
+        <% } %>
+      
+      </ul>
+    </div>
+
+    <ul class="md:container md:mx-auto border border-black participants">
+      <% for(var i=10; i<20; i++) {%>
+        
          <li><%= NameofPlayers[i] %></li>
       <% } %>
-      </ul>
+    </ul>
     
 
 

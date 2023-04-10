@@ -1,0 +1,10 @@
+.name_level{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.participants{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
