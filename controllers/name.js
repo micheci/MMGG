@@ -1,15 +1,12 @@
 
-// const Post = require("../models/Post");
-// const Event=require("../models/Event")
-// const Sub=require("../models/Sub")
-// const Income=require("../models/Income")
+
 
 module.exports = {
   getSummonerName: async (req, res) => {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-db797416-a41f-4b3c-b731-19284e7f19ff"
+        let API_key="RGAPI-1e747a58-fb16-41f9-ab60-6c0621743e4b"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -57,7 +54,13 @@ module.exports = {
         let NameofPlayers=[];
         NameofPlayers=await getNames(matchListUrlFull1,routingRegion,API_key,valueRegion);
         let participantsPicsID=[]
+        let championName=[]
+        let champPicsUrl=[]
         participantsPicsID=await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
+        console.log(championName)
+        console.log(champPicsUrl)
+        //get pics of champs
+       
         
      
     
@@ -89,25 +92,25 @@ module.exports = {
              participantsPicsID=matchDataListFull1.info
              //navigate through all the participants
              for(let j=0;j<10;j++){
-              console.log(participantsPicsID['participants'][j]['championId'])
-             }
-            
-
-            
+             
+              championName.push(participantsPicsID['participants'][j]['championName'])
+              champPicsUrl='http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png'
+              //console.log(champPicsUrl)
+              //console.log(participantsPicsID['participants'][j]['championName'])
+             }          
           }
-           return participantsPicsID
-        
+           return participantsPicsID        
         }
         
        
         
-
+      
             
-      res.render("index.ejs", { name:name,SummonerNameurlFull:SummonerNameurlFull,profilePicURL:profilePicURL,
-        rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers});
-    } catch (err) {
-      console.log(err);
-    }
-  },
+        res.render("index.ejs", { name:name,SummonerNameurlFull:SummonerNameurlFull,profilePicURL:profilePicURL,
+          rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers});
+      } catch (err) {
+        console.log(err);
+      }
+    },
   
 };

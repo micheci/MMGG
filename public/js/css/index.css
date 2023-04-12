@@ -6,5 +6,9 @@
 }
 .participants{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    justify-content: right;
+    grid-template-columns: repeat(4, 10rem);
+}
+.ChampPics{
+    width: 3rem;
 }

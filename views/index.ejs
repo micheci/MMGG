@@ -13,7 +13,10 @@
 
 </head>
 <body >
-     <h1 class="text-2xl text-center">MMGG</h1>
+
+
+  <%  if(typeof NameofPlayers !== "undefined") { %>
+    <h1 class="text-2xl text-center">MMGG</h1>
 
 
 
@@ -52,18 +55,15 @@
     </div>
     </form>
     
-   
-  
-
-    
-   
-
     <!-- Need tier pic,rank,tier,winloss in one place -->
 
     <div class="md:container md:mx-auto rounded flex border border-black pt-4">
       <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
       <div class="flex flex-col flex-1 ">   
-      <% if (rankedInfoFull[0]) { %>
+      <%= rankedInfoFull[0]  %>
+        <h1>Nothing</h1>
+      
+        
         <h6 ><%= rankedInfoFull[0].queueType %></h6>
         <div class="flex flex-row">
           <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
@@ -73,11 +73,12 @@
         <h6 >LP: <%= rankedInfoFull[0].leaguePoints %></h6>
         <h6 >Wins: <%= rankedInfoFull[0].wins %></h6>
         <h6 >Losses: <%= rankedInfoFull[0].losses %></h6>
-        <% } %>
-        </div> 
+         </div> 
+        
+       
       </div>
       <div class="flex flex-col pr-4">
-        <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic">
+        <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic"/>
         <div class="flex flex-col name_level">
         <%= SummonerNameurlFull.name %>
         <h3><%= SummonerNameurlFull.summonerLevel %></h3></div>
@@ -107,8 +108,12 @@
       <% } %>
     </ul>
     
-  
-
+    <%=  champPicsUrl[0]  %>
+   
+}
+<% }else{ %>
+  <h1>sad</h1>
+  <% } %>
 
       <script src="/js/tierPic.js"></script>
 </body>
