@@ -58,7 +58,7 @@ module.exports = {
         let champPicsUrl=[]
         participantsPicsID=await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
         console.log(championName)
-        //console.log(champPicsUrl)
+        console.log(champPicsUrl)
         //get pics of champs
        
         
@@ -95,7 +95,7 @@ module.exports = {
              
               championName.push(participantsPicsID['participants'][j]['championName'])
               champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png')
-              console.log(champPicsUrl)
+           
 
               //console.log(participantsPicsID['participants'][j]['championName'])
              }          
@@ -109,7 +109,7 @@ module.exports = {
             
         res.render("index.ejs", { name:name,SummonerNameurlFull:SummonerNameurlFull,profilePicURL:profilePicURL,
           rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers,champPicsUrl:champPicsUrl});
-      } catch (err) {
+      } catch (e) {
         console.log(err);
       }
     },

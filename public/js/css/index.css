@@ -9,6 +9,6 @@
     justify-content: right;
     grid-template-columns: repeat(4, 10rem);
 }
-.ChampPics{
+.champPics{
     width: 3rem;
 }

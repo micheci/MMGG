@@ -15,7 +15,7 @@
 <body >
 
 
-  <!-- <%  if(typeof NameofPlayers !== "undefined") { %> -->
+ 
     <h1 class="text-2xl text-center">MMGG</h1>
 
 
@@ -54,9 +54,9 @@
         <button type="submit" class=" navbtn btn btn-primary mt-2">Search</button> 
     </div>
     </form>
-    
+    <%  if(typeof NameofPlayers !== "undefined") { %>
     <!-- Need tier pic,rank,tier,winloss in one place -->
-    <% if (rankedInfoFull[0]) { %>
+    
     <div class="md:container md:mx-auto rounded flex border border-black pt-4">
       <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
       <div class="flex flex-col flex-1 ">   
@@ -82,8 +82,9 @@
         <h3><%= SummonerNameurlFull.summonerLevel %></h3></div>
       </div>
     </div>
+    
   
-
+    
 
     <div class="md:container md:mx-auto border border-black  flex flex-row">
       <!-- Add champ used, scoreline,win loss -->
@@ -93,7 +94,7 @@
         
         <% for(var i=0; i<10; i++) {%>
           <!-- <img src="<% champPicsUrl[0] %>" alt="champ Pics"/> -->
-          <img class="h-24 w-24 rounded-lg" src="<% champPicsUrl[0] %>" alt="Profile Pic"/>
+          <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">
           
           <li ><%= NameofPlayers[i] %></li>
           
@@ -103,20 +104,20 @@
     </div>
 
     <ul class="md:container md:mx-auto border border-black participants">
-      <% for(var i=10; i<20; i++) {%>
-        
-         <li><%= NameofPlayers[i] %></li>
+      <% for(var j=10; j<20; j++) {%>
+        <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">
+         <li><%= NameofPlayers[j] %></li>
       <% } %>
     </ul>
-    
-    
-   <img src="<%=  champPicsUrl[0]  %>" alt="">
-<% } %>
+     
+ 
+ 
+<img src="<%=  champPicsUrl[14]  %>" alt="">
 
 
-<!-- <% }else{ %> -->
+<% }else{ %> 
   <h1>sad</h1>
-  <!-- <% } %> -->
+  <% } %>
 
       <script src="/js/tierPic.js"></script>
 </body>
