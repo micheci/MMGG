@@ -15,7 +15,7 @@
 <body >
 
 
-  <%  if(typeof NameofPlayers !== "undefined") { %>
+  <!-- <%  if(typeof NameofPlayers !== "undefined") { %> -->
     <h1 class="text-2xl text-center">MMGG</h1>
 
 
@@ -56,14 +56,11 @@
     </form>
     
     <!-- Need tier pic,rank,tier,winloss in one place -->
-
+    <% if (rankedInfoFull[0]) { %>
     <div class="md:container md:mx-auto rounded flex border border-black pt-4">
       <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
       <div class="flex flex-col flex-1 ">   
-      <%= rankedInfoFull[0]  %>
-        <h1>Nothing</h1>
-      
-        
+        <% rankedInfoFull[0] %>      
         <h6 ><%= rankedInfoFull[0].queueType %></h6>
         <div class="flex flex-row">
           <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
@@ -77,6 +74,7 @@
         
        
       </div>
+      
       <div class="flex flex-col pr-4">
         <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic"/>
         <div class="flex flex-col name_level">
@@ -94,8 +92,11 @@
         
         
         <% for(var i=0; i<10; i++) {%>
-
+          <!-- <img src="<% champPicsUrl[0] %>" alt="champ Pics"/> -->
+          <img class="h-24 w-24 rounded-lg" src="<% champPicsUrl[0] %>" alt="Profile Pic"/>
+          
           <li ><%= NameofPlayers[i] %></li>
+          
         <% } %>
       
       </ul>
@@ -108,12 +109,14 @@
       <% } %>
     </ul>
     
-    <%=  champPicsUrl[0]  %>
-   
-}
-<% }else{ %>
+    
+   <img src="<%=  champPicsUrl[0]  %>" alt="">
+<% } %>
+
+
+<!-- <% }else{ %> -->
   <h1>sad</h1>
-  <% } %>
+  <!-- <% } %> -->
 
       <script src="/js/tierPic.js"></script>
 </body>

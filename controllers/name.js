@@ -6,7 +6,7 @@ module.exports = {
     try {
         let name=req.body.SummonerName
         let valueRegion=req.body.selectpicker
-        let API_key="RGAPI-1e747a58-fb16-41f9-ab60-6c0621743e4b"
+        let API_key="RGAPI-bc168463-4b44-4a0c-aeeb-d476c2566ecb"
         let url='https://'+valueRegion+'/lol/summoner/v4/summoners/by-name/'+name+'?api_key='+API_key
         
         const SummonerNameurl1=await fetch(url); 
@@ -58,7 +58,7 @@ module.exports = {
         let champPicsUrl=[]
         participantsPicsID=await getParticipantsPics(matchListUrlFull1,routingRegion,API_key,valueRegion)
         console.log(championName)
-        console.log(champPicsUrl)
+        //console.log(champPicsUrl)
         //get pics of champs
        
         
@@ -84,7 +84,7 @@ module.exports = {
         }
        async function getParticipantsPics(matchListUrlFull1,routingRegion){
         
-        let results=[]
+       
           for(let i=0;i<matchListUrlFull1.length;i++){
             let matchDataList= 'https://'+routingRegion+'/lol/match/v5/matches/'+matchListUrlFull1[i]+'?api_key='+API_key             
             const matchDataListFull=await fetch(matchDataList);
@@ -94,8 +94,9 @@ module.exports = {
              for(let j=0;j<10;j++){
              
               championName.push(participantsPicsID['participants'][j]['championName'])
-              champPicsUrl='http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png'
-              //console.log(champPicsUrl)
+              champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png')
+              console.log(champPicsUrl)
+
               //console.log(participantsPicsID['participants'][j]['championName'])
              }          
           }
@@ -107,7 +108,7 @@ module.exports = {
       
             
         res.render("index.ejs", { name:name,SummonerNameurlFull:SummonerNameurlFull,profilePicURL:profilePicURL,
-          rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers});
+          rankedInfoFull:rankedInfoFull,NameofPlayers:NameofPlayers,champPicsUrl:champPicsUrl});
       } catch (err) {
         console.log(err);
       }
