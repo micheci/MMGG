@@ -54,7 +54,8 @@
         <button type="submit" class=" navbtn btn btn-primary mt-2">Search</button> 
     </div>
     </form>
-    <%  if(typeof NameofPlayers !== "undefined") { %>
+
+    <%  if(typeof NameofPlayers !== "undefined" && typeof champPicsUrl !== "undefined") { %>
     <!-- Need tier pic,rank,tier,winloss in one place -->
     
     <div class="md:container md:mx-auto rounded flex border border-black pt-4">
@@ -88,18 +89,12 @@
 
     <div class="md:container md:mx-auto border border-black  flex flex-row">
       <!-- Add champ used, scoreline,win loss -->
-      <img src="" alt="champUsed">
+      <img src="<%=  champPicsUrl[0]  %>" alt="champUsed">
       <ul class="flex-1 participants">
-        
-        
-        <% for(var i=0; i<10; i++) {%>
-          <!-- <img src="<% champPicsUrl[0] %>" alt="champ Pics"/> -->
-          <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">
-          
-          <li ><%= NameofPlayers[i] %></li>
-          
-        <% } %>
-      
+        <% for(var i=0; i<10; i++) {%>       
+          <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
+          <li ><%= NameofPlayers[i] %></li>         
+        <% } %>  
       </ul>
     </div>
 
@@ -112,10 +107,9 @@
      
  
  
-<img src="<%=  champPicsUrl[14]  %>" alt="">
 
 
-<% }else{ %> 
+<% } else { %> 
   <h1>sad</h1>
   <% } %>
 
