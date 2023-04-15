@@ -52,17 +52,21 @@ module.exports = {
       let NameofPlayers = [];
       NameofPlayers = await getNames(matchListUrlFull1, routingRegion, API_key, valueRegion);
       let participantsPicsID = [];
+      let participantsScores=[]
       let championName = [];
+      let assists=[]
+      let deaths=[]
+      let kills=[]
       let champPicsUrl = [];
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
       let champsPlayed=[]
-      let scores=[]
+      
       //console.log(champsPlayed)
       console.log(championName);
       console.log(NameofPlayers)
       await getScores(participantsPicsID)
-      console.log(scores);
-      console.log()
+      console.log(assists)
+      console.log(deaths)
       await getUserChampPic(NameofPlayers,championName)
 
       //champPicsUrl=await getChampPics(championName)
@@ -99,6 +103,11 @@ module.exports = {
           for (let j = 0; j < 10; j++) {
 
             championName.push(participantsPicsID['participants'][j]['championName']);
+                assists.push(participantsScores['participants'][j]['assists'])
+             deaths.push(participantsScores['participants'][j]['deaths'])
+            kills.push(participantsScores['participants'][j]['kills'])
+            
+          //   console.log(participantsScores['participants'][i]['deaths'])
 
             //champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png')
             //console.log(champPicsUrl)
@@ -134,13 +143,27 @@ module.exports = {
       
         
       }
-console.log(participantsPicsID[0])
-      // async function getScores(participantsPicsID){
-      //   for(let i=0;i<8;i++){
-      //     scores.push(participantsPicsID['allInPings'])
+//       async function getScores(matchListUrlFull1, routingRegion){
+
+//         for (let i = 0; i < matchListUrlFull1.length; i++) {
+//           let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
+//           const matchDataListFull = await fetch(matchDataList);
+//           const matchDataListFull1 = await matchDataListFull.json();
+//           participantsScores = matchDataListFull1.info['participants'];
+// console.log(participantsScores)
+//           //navigate through all the participants
+//           // for (let j = 0; j < 10; j++) {
+
+//           //   assists.push(participantsScores['participants'][i]['assists'])
+//           //   deaths.push(participantsScores['participants'][i]['deaths'])
+//           //   kills.push(participantsScores['participants'][i]['kills'])
+            
+//           //   console.log(participantsScores['participants'][i]['deaths'])
+//           // }
+//         }
           
-      //   }
-      // }
+        
+//       }
 
 
 
