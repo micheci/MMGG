@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-d8d76643-c3c9-40fe-b3e1-3bdae446be93";
+      let API_key = "RGAPI-42e01a6a-d114-4fcc-bf03-97925f02ebbe";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
@@ -64,9 +64,9 @@ module.exports = {
       //console.log(champsPlayed)
       console.log(championName);
       console.log(NameofPlayers)
-      await getScores(participantsPicsID)
       console.log(assists)
       console.log(deaths)
+      console.log(assists)
       await getUserChampPic(NameofPlayers,championName)
 
       //champPicsUrl=await getChampPics(championName)
@@ -103,9 +103,9 @@ module.exports = {
           for (let j = 0; j < 10; j++) {
 
             championName.push(participantsPicsID['participants'][j]['championName']);
-                assists.push(participantsScores['participants'][j]['assists'])
-             deaths.push(participantsScores['participants'][j]['deaths'])
-            kills.push(participantsScores['participants'][j]['kills'])
+                assists.push(participantsPicsID['participants'][j]['assists'])
+             deaths.push(participantsPicsID['participants'][j]['deaths'])
+            kills.push(participantsPicsID['participants'][j]['kills'])
             
           //   console.log(participantsScores['participants'][i]['deaths'])
 
@@ -168,7 +168,7 @@ module.exports = {
 
 
       res.render("index.ejs", {
-        name: name,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
+        name: name,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
         rankedInfoFull: rankedInfoFull, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
       });
     } catch (err) {

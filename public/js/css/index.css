@@ -7,8 +7,11 @@
 .participants{
     display: grid;
     justify-content: right;
-    grid-template-columns: repeat(4, 10rem);
+    grid-template-columns: repeat(6, 10rem);
 }
 .champPics{
     width: 3rem;
+}
+.infoContainer{
+    width: 15rem;
 }
