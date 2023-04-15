@@ -55,7 +55,16 @@ module.exports = {
       let championName = [];
       let champPicsUrl = [];
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
+      let champsPlayed=[]
+      let scores=[]
+      //console.log(champsPlayed)
       console.log(championName);
+      console.log(NameofPlayers)
+      await getScores(participantsPicsID)
+      console.log(scores);
+      console.log()
+      await getUserChampPic(NameofPlayers,championName)
+
       //champPicsUrl=await getChampPics(championName)
       // console.log(participantsPicsID) //All the info about the game
       //get pics of champs
@@ -110,12 +119,33 @@ module.exports = {
         }
       }
 
-// Make function to get users played champ
+// Make function to get users played champ CAN
+
+      async function getUserChampPic(NameofPlayers,championName){
+        for(let i=0;i<NameofPlayers.length;i++){
+          if(NameofPlayers[i]===req.body.SummonerName){
+            
+            champsPlayed.push(championName[i])
+           console.log(champsPlayed)
+          }
+          
+        }
+
+      
+        
+      }
+console.log(participantsPicsID[0])
+      // async function getScores(participantsPicsID){
+      //   for(let i=0;i<8;i++){
+      //     scores.push(participantsPicsID['allInPings'])
+          
+      //   }
+      // }
 
 
 
       res.render("index.ejs", {
-        name: name, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
+        name: name,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
         rankedInfoFull: rankedInfoFull, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
       });
     } catch (err) {

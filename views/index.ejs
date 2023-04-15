@@ -89,7 +89,9 @@
 
     <div class="md:container md:mx-auto border border-black  flex flex-row">
       <!-- Add champ used, scoreline,win loss -->
-      <img src="<%=  champPicsUrl[0]  %>" alt="champUsed">
+
+    
+      <img src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
       <ul class="flex-1 participants">
         <% for(var i=0; i<10; i++) {%>       
           <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
@@ -98,13 +100,17 @@
       </ul>
     </div>
 
+    <div class="md:container md:mx-auto border border-black  flex flex-row">
+
+    <img src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
     <ul class="md:container md:mx-auto border border-black participants">
+     
       <% for(var j=10; j<20; j++) {%>
         <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">
          <li><%= NameofPlayers[j] %></li>
       <% } %>
     </ul>
-     
+  </div>
  
  
 
