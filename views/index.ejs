@@ -91,46 +91,50 @@
 
 
     <!-- Make teams make sense -->
-    <div class="md:container md:mx-auto border border-black justify-right flex flex-row">
+    <div class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       <!-- Add champ used, scoreline,win loss -->
       <img src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
-      <div class="flex justify-right players">
-      <ul class="">
+      <div class="flex players pr-40">
+      <ul class="flex flex-col justify-between">
         <% for(var i=0; i<5; i++) {%>       
-          <div class="flex infoContainer">
-          <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
-          <li ><%= NameofPlayers[i] %>  <%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></li> 
-        </div>
+          <div class="flex infoContainer justify-between p-0 m-0">
+            <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
+            <li ><%= NameofPlayers[i] %>  </li> 
+            <span><%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></span>
+          </div>
           <% } %>  
       </ul>
-      <ul class="flex flex-col  ">
+      <ul class="flex flex-col justify-between  ">
         <% for(var j=5; j<10; j++) {%> 
-               <div class="flex infoContainer">
+               <div class="flex infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">        
-          <li ><%= NameofPlayers[j] %>  <%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></li> 
+          <li ><%= NameofPlayers[j] %>  </li>
+          <span><%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></span> 
           </div> 
           <% } %> 
       </ul>
     </div>
     </div>
 
-    <div class="md:container md:mx-auto border border-black justify-right flex flex-row">
+    <div class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       <!-- Add champ used, scoreline,win loss -->
       <img src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
-      <div class="flex justify-right players">
-      <ul class="">
+      <div class="flex players pr-40">
+      <ul class="flex flex-col justify-between ">
         <% for(var i=10; i<15; i++) {%>       
-          <div class="flex">
+          <div class="flex infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
-          <li ><%= NameofPlayers[i] %>  <%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></li> 
+          <li ><%= NameofPlayers[i] %>  </li> 
+          <span><%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></span>
         </div>
           <% } %>  
       </ul>
-      <ul class="flex flex-col ">
+      <ul class="flex flex-col justify-between  ">
         <% for(var j=15; j<20; j++) {%> 
-               <div class="flex ">
+               <div class="flex infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">        
-          <li ><%= NameofPlayers[j] %>  <%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></li> 
+          <li ><%= NameofPlayers[j] %>  </li> 
+          <span><%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></span>
           </div> 
           <% } %> 
       </ul>
