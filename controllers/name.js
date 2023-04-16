@@ -59,6 +59,7 @@ module.exports = {
       let kills=[]
       let champPicsUrl = [];
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
+      await getWinLossColor(matchListUrlFull1, routingRegion)
       let champsPlayed=[]
       
       //console.log(champsPlayed)
@@ -70,7 +71,7 @@ module.exports = {
       await getUserChampPic(NameofPlayers,championName)
 
       //champPicsUrl=await getChampPics(championName)
-      // console.log(participantsPicsID) //All the info about the game
+      // console.log(participantsPicsID[0]['championName'])
       //get pics of champs
       async function getNames(matchListUrlFull1, routingRegion) {
         let list = [];
@@ -138,32 +139,42 @@ module.exports = {
            console.log(champsPlayed)
           }
           
-        }
-
-      
-        
+        }     
       }
-//       async function getScores(matchListUrlFull1, routingRegion){
 
-//         for (let i = 0; i < matchListUrlFull1.length; i++) {
-//           let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
-//           const matchDataListFull = await fetch(matchDataList);
-//           const matchDataListFull1 = await matchDataListFull.json();
-//           participantsScores = matchDataListFull1.info['participants'];
-// console.log(participantsScores)
-//           //navigate through all the participants
-//           // for (let j = 0; j < 10; j++) {
 
-//           //   assists.push(participantsScores['participants'][i]['assists'])
-//           //   deaths.push(participantsScores['participants'][i]['deaths'])
-//           //   kills.push(participantsScores['participants'][i]['kills'])
+      async function getWinLossColor(matchListUrlFull1, routingRegion) {
+
+
+        for (let i = 0; i < matchListUrlFull1.length; i++) {
+          let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
+          const matchDataListFull = await fetch(matchDataList);
+          const matchDataListFull1 = await matchDataListFull.json();
+          participantsPicsID = matchDataListFull1.info;
+
+          //navigate through all the participants
+          for (let j = 0; j < 10; j++) {
+            // if(req.body.SummonerName===participantsPicsID['participants'][j]['championName']){
+                          console.log(participantsPicsID['participants'][j]['win'])
+
+            //}
             
-//           //   console.log(participantsScores['participants'][i]['deaths'])
-//           // }
-//         }
-          
-        
-//       }
+          //   console.log(participantsScores['participants'][i]['deaths'])
+
+            //champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png')
+            //console.log(champPicsUrl)
+          }
+        }
+        return participantsPicsID;
+      }
+      // function getWinLossColor(){
+      //   if(data==win){
+      //     color=blue
+      //   }else{
+      //     color=red
+      //   }
+      // }
+
 
 
 
