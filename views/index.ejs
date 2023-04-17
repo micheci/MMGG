@@ -50,7 +50,7 @@
             <option name="vietnam" value="vn2.api.riotgames.com">Vietnam</option>
           </select>
        
-        <button type="submit" class=" navbtn btn btn-primary mt-2">Search</button> 
+        <button type="submit" class=" navbtn btn btn-primary">Search</button> 
     </div>
     </form>
 
@@ -61,7 +61,7 @@
       <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
       <div class="flex flex-col flex-1 ">   
         <% rankedInfoFull[0] %>      
-        <h6 ><%= rankedInfoFull[0].queueType %></h6>
+        <h6 class="text-center"><%= rankedInfoFull[0].queueType %></h6>
         <div class="flex flex-row">
           <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
           <span><%= rankedInfoFull[0].rank %></span> 

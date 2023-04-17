@@ -10,19 +10,20 @@ let backgroundColorResult2=document.getElementById('backgroundColorResult').inne
 
 if(backgroundColor==='false'){
     console.log('false')
-    document.getElementById('backgroundColorResult').style.backgroundColor="#FF6C81";
-    //document.getElementById('backgroundColorResult').style.backgroundColor="#4171D6";
+    document.getElementById('backgroundColorResult').style.backgroundColor="rgb(255, 108, 129,.5)";
 
      // specify the image path here
 
 }else{
-    console.log('true')
+    document.getElementById('backgroundColorResult').style.backgroundColor="rgb(65, 113, 214,.5)";
+
 }
 if(backgroundColor2==='false'){
 document.getElementById('backgroundColorResult2').style.backgroundColor="rgb(255, 108, 129,.5)";
      // specify the image path here
 
-}else{    document.getElementById('backgroundColorResult2').style.backgroundColor="#4171D6";
+}else{        document.getElementById('backgroundColorResult').style.backgroundColor="rgb(65, 113, 214,.5)";
+
 
    
 

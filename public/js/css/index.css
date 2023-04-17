@@ -30,3 +30,20 @@ label{
     font-size: 1.1rem;
     margin-right: 4rem;
 }
+button{
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 1.2rem;
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+}
+button:hover{
+    color:blue
+}
+h6{
+    color: white;
+}
