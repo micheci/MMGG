@@ -20,7 +20,7 @@
 
 
     <form action="/name/getSummonerName" method="POST">
-        <div class="md:container md:mx-auto rounded flex border justify-center border-black">
+        <div class="md:container md:mx-auto rounded flex border justify-center border-white">
           <label for="SummonerName" class="form-label"
             >Get Summoner Name</label
           >
@@ -50,21 +50,21 @@
             <option name="vietnam" value="vn2.api.riotgames.com">Vietnam</option>
           </select>
        
-        <button type="submit" class=" navbtn btn btn-primary">Search</button> 
+        <button type="submit" class=" navbtn btn bg-cyan-500 border-white rounded-2xl">Search</button> 
     </div>
     </form>
 
     <%  if(typeof NameofPlayers !== "undefined" && typeof champPicsUrl !== "undefined") { %>
     <!-- Need tier pic,rank,tier,winloss in one place -->
     
-    <div class="md:container md:mx-auto rounded flex border border-black pt-4">
+    <div class="md:container md:mx-auto rounded flex border border-white pt-4 ">
       <img class="h-24 w-24 rounded-lg " id='tier_pic' src="" alt="Tier pic"/>
       <div class="flex flex-col flex-1 ">   
         <% rankedInfoFull[0] %>      
-        <h6 class="text-center"><%= rankedInfoFull[0].queueType %></h6>
+        <h6 class="font-bold"><%= rankedInfoFull[0].queueType %></h6>
         <div class="flex flex-row">
           <h6 id="tier"><%= rankedInfoFull[0].tier %></h6>
-          <span><%= rankedInfoFull[0].rank %></span> 
+          <span class="pl-1 text-white"> <%= rankedInfoFull[0].rank %></span> 
          </div>
         <div class="flex flex-col justify-right ">
         <h6 >LP: <%= rankedInfoFull[0].leaguePoints %></h6>
@@ -90,7 +90,7 @@
 
 
     <!-- Make teams make sense -->
-    <div id="backgroundColorResult" class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
+    <div id="backgroundColorResult" class="mt-2 md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       <!-- Add champ used, scoreline,win loss -->
       <div id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
 
