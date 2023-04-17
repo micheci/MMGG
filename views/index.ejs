@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMGG</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="../js/css/index.css">
 
     
@@ -16,7 +15,7 @@
 
 
  
-    <h1 class="text-2xl text-center">MMGG</h1>
+    <h1 class="text-center">MMGG</h1>
 
 
 
@@ -91,9 +90,11 @@
 
 
     <!-- Make teams make sense -->
-    <div class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
+    <div id="backgroundColorResult" class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       <!-- Add champ used, scoreline,win loss -->
-      <img src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
+      <div id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
+
+      <img class='championUsedPic' src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between">
         <% for(var i=0; i<5; i++) {%>       
@@ -116,7 +117,10 @@
     </div>
     </div>
 
-    <div class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
+    
+    <div id="backgroundColorResult2" class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
+      
+      <div id="backgroundColor2"><%= matchesBackgroundColor[1] %></div>
       <!-- Add champ used, scoreline,win loss -->
       <img class="championUsedPic" src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
       <div class="flex players pr-40">
@@ -150,5 +154,6 @@
   <% } %>
 
       <script src="/js/tierPic.js"></script>
+      <script src="/js/backgroundColor.js"></script>
 </body>
 </html>

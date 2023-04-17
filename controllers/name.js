@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-42e01a6a-d114-4fcc-bf03-97925f02ebbe";
+      let API_key = "RGAPI-05a82d27-518c-4749-b02b-7734f4e70c82";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
@@ -58,8 +58,9 @@ module.exports = {
       let deaths=[]
       let kills=[]
       let champPicsUrl = [];
+      let matchesBackgroundColor=[]
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
-      await getWinLossColor(matchListUrlFull1, routingRegion)
+      await getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers)
       let champsPlayed=[]
       
       //console.log(champsPlayed)
@@ -68,6 +69,7 @@ module.exports = {
       console.log(assists)
       console.log(deaths)
       console.log(assists)
+      console.log(matchesBackgroundColor)
       await getUserChampPic(NameofPlayers,championName)
 
       //champPicsUrl=await getChampPics(championName)
@@ -123,9 +125,6 @@ module.exports = {
         for (let j = 0; j < 20; j++) {
 
           champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + championName[j] + '.png');
-
-
-          console.log('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + championName[j] + '.png');
         }
       }
 
@@ -136,50 +135,37 @@ module.exports = {
           if(NameofPlayers[i]===req.body.SummonerName){
             
             champsPlayed.push(championName[i])
-           console.log(champsPlayed)
+          
           }
           
         }     
       }
 
 
-      async function getWinLossColor(matchListUrlFull1, routingRegion) {
-
-
+      async function getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers) {
         for (let i = 0; i < matchListUrlFull1.length; i++) {
           let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
           const matchDataListFull = await fetch(matchDataList);
           const matchDataListFull1 = await matchDataListFull.json();
           participantsPicsID = matchDataListFull1.info;
 
-          //navigate through all the participants
+          //navigate through all the participants and check if same user find if win or lost game
           for (let j = 0; j < 10; j++) {
-            // if(req.body.SummonerName===participantsPicsID['participants'][j]['championName']){
-                          console.log(participantsPicsID['participants'][j]['win'])
-
-            //}
+            if(req.body.SummonerName===NameofPlayers[j]){
             
-          //   console.log(participantsScores['participants'][i]['deaths'])
-
-            //champPicsUrl.push('http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/'+championName[j]+'.png')
-            //console.log(champPicsUrl)
+              matchesBackgroundColor.push(participantsPicsID['participants'][j]['win'])
+            }
           }
         }
-        return participantsPicsID;
+        
       }
-      // function getWinLossColor(){
-      //   if(data==win){
-      //     color=blue
-      //   }else{
-      //     color=red
-      //   }
-      // }
+     
 
 
 
 
       res.render("index.ejs", {
-        name: name,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
+        name: name,matchesBackgroundColor:matchesBackgroundColor,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
         rankedInfoFull: rankedInfoFull, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
       });
     } catch (err) {
