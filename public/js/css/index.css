@@ -24,7 +24,8 @@ body{
 }
 h1{
     color: white;
-    font-size: 2rem;
+    font-size: 4rem;
+    margin-top: 10rem;
 }
 label{
     color: white;
@@ -49,3 +50,21 @@ button:hover{
 h6{
     color: white;
 }
+.homeNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    text-align: center;
+    margin: auto;
+    padding: 0%;
+    margin-top: 5%;
+    background-color: gray;
+
+    
+}
+html, body {
+    margin: 0;
+    height: 100%;
+}
+

@@ -14,11 +14,13 @@
 </head>
 <body >
 
-
  
-    <form class=' md:container md:mx-auto' action="/name/getSummonerName" method="POST">
-        <div class=" rounded border justify-center h-screen grid   border-white">
-            <select  data-style="btn-info" name="selectpicker">
+<h1 class="text-center">MMGG</h1>
+    <form  action="/name/getSummonerName" method="POST">
+      
+
+        <div class=" md:container md:mx-auto homeNav rounded border justify-center grid flex flex-row  border-white">
+          <select data-style="btn-info" name="selectpicker">
                 <option name="brazil" value="br1.api.riotgames.com">Brazil</option>
                 <option name="europe east" value="eun1.api.riotgames.com">EUN</option>
                 <option name="europe west" value="euw1.api.riotgames.com">EUW</option>
@@ -35,7 +37,7 @@
                 <option name="thailand" value="th2.api.riotgames.com">Thailand</option>
                 <option name="taiwan" value="tw2.api.riotgames.com">Taiwan</option>
                 <option name="vietnam" value="vn2.api.riotgames.com">Vietnam</option>
-              </select>
+            </select>
             <label for="SummonerName" class="form-label"
             >Get Summoner Name</label
           >
@@ -46,10 +48,8 @@
             aria-describedby="SummonerNameHelp"
             name="SummonerName"
           />
-       
-       
         <button type="submit" class=" navbtn btn bg-cyan-500 border-white rounded-2xl">Search</button> 
-    </div>
+        </div>
     </form>
 
 

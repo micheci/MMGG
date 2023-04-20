@@ -15,15 +15,17 @@
 
 
  
-    <h1 class="text-center">MMGG</h1>
+   
 
 
 
     
     <%  if(typeof NameofPlayers !== "undefined" && typeof champPicsUrl !== "undefined") { %>
     <!-- Need tier pic,rank,tier,winloss in one place -->
+  
     <form action="/name/getSummonerName" method="POST">
       <div class="md:container md:mx-auto rounded flex border justify-center border-white">
+        <h1 class="text-center">MMGG</h1>
         <label for="SummonerName" class="form-label"
           >Get Summoner Name</label
         >
@@ -152,7 +154,7 @@
 
 <% } else { %> 
 
-  
+
   <%- include('partials/home.ejs') %>.
 
 
