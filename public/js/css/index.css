@@ -13,7 +13,7 @@
     width: 3rem;
 }
 .infoContainer{
-    width: 18rem;
+    width: 15rem;
 }
 .championUsedPic{
     width: 14rem;
@@ -59,12 +59,20 @@ h6{
     margin: auto;
     padding: 0%;
     margin-top: 5%;
-    background-color: gray;
-
-    
+    background-image: linear-gradient(to right, rgb(65, 113, 214,.5), rgb(255, 108, 129,.5));
+    /* background-color: rgba(65, 113, 214, 0.5);    */
 }
 html, body {
     margin: 0;
     height: 100%;
 }
 
+.hide{
+    display:none
+}
+.title{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+   
+}

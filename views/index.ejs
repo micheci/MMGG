@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMGG</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../js/css/index.css">
-
-    
+    <link rel="stylesheet" href="../js/css/index.css">    
 
 </head>
 <body >
@@ -22,11 +20,31 @@
     
     <%  if(typeof NameofPlayers !== "undefined" && typeof champPicsUrl !== "undefined") { %>
     <!-- Need tier pic,rank,tier,winloss in one place -->
-  
-    <form action="/name/getSummonerName" method="POST">
-      <div class="md:container md:mx-auto rounded flex border justify-center border-white">
-        <h1 class="text-center">MMGG</h1>
-        <label for="SummonerName" class="form-label"
+    <h2 class="text-center mt-2 text-white title">MMGG</h2>
+
+    <form  action="/name/getSummonerName" method="POST">
+      
+
+      <div class=" md:container md:mx-auto homeNav rounded border justify-center grid flex flex-row  border-white">
+        <select data-style="btn-info" name="selectpicker">
+              <option name="brazil" value="br1.api.riotgames.com">Brazil</option>
+              <option name="europe east" value="eun1.api.riotgames.com">EUN</option>
+              <option name="europe west" value="euw1.api.riotgames.com">EUW</option>
+              <option name="japan" value="jp1.api.riotgames.com">JP</option>
+              <option name="korea" value="kr.api.riotgames.com">Korea</option>
+              <option name="latin america south" value="la1.api.riotgames.com">LAS</option>
+              <option name="latin america north" value="la2.api.riotgames.com">LAN</option>
+              <option name="north america" value="na1.api.riotgames.com">NA</option>
+              <option name="oceania" value="oc1.api.riotgames.com">Oceania</option>
+              <option name="turkey" value="tr1.api.riotgames.com">Turkey</option>
+              <option name="russia" value="ru.api.riotgames.com">Russia</option>
+              <option name="phillippines" value="ph2.api.riotgames.com">Phillippines</option>
+              <option name="singapore" value="sg2.api.riotgames.com">Singapore</option>
+              <option name="thailand" value="th2.api.riotgames.com">Thailand</option>
+              <option name="taiwan" value="tw2.api.riotgames.com">Taiwan</option>
+              <option name="vietnam" value="vn2.api.riotgames.com">Vietnam</option>
+          </select>
+          <label for="SummonerName" class="form-label"
           >Get Summoner Name</label
         >
         <input
@@ -36,27 +54,8 @@
           aria-describedby="SummonerNameHelp"
           name="SummonerName"
         />
-        <select  data-style="btn-info" name="selectpicker">
-          <option name="brazil" value="br1.api.riotgames.com">Brazil</option>
-          <option name="europe east" value="eun1.api.riotgames.com">EUN</option>
-          <option name="europe west" value="euw1.api.riotgames.com">EUW</option>
-          <option name="japan" value="jp1.api.riotgames.com">JP</option>
-          <option name="korea" value="kr.api.riotgames.com">Korea</option>
-          <option name="latin america south" value="la1.api.riotgames.com">LAS</option>
-          <option name="latin america north" value="la2.api.riotgames.com">LAN</option>
-          <option name="north america" value="na1.api.riotgames.com">NA</option>
-          <option name="oceania" value="oc1.api.riotgames.com">Oceania</option>
-          <option name="turkey" value="tr1.api.riotgames.com">Turkey</option>
-          <option name="russia" value="ru.api.riotgames.com">Russia</option>
-          <option name="phillippines" value="ph2.api.riotgames.com">Phillippines</option>
-          <option name="singapore" value="sg2.api.riotgames.com">Singapore</option>
-          <option name="thailand" value="th2.api.riotgames.com">Thailand</option>
-          <option name="taiwan" value="tw2.api.riotgames.com">Taiwan</option>
-          <option name="vietnam" value="vn2.api.riotgames.com">Vietnam</option>
-        </select>
-     
       <button type="submit" class=" navbtn btn bg-cyan-500 border-white rounded-2xl">Search</button> 
-  </div>
+      </div>
   </form>
 
     
@@ -74,10 +73,9 @@
         <h6 >Wins: <%= rankedInfoFull[0].wins %></h6>
         <h6 >Losses: <%= rankedInfoFull[0].losses %></h6>
          </div> 
-        
-       
       </div>
       
+
       <div class="flex flex-col pr-4">
         <img class="h-24 w-24 rounded-lg" src="<%= profilePicURL %>" alt="Profile Pic"/>
         <div class="flex flex-col name_level">
@@ -95,13 +93,13 @@
     <!-- Make teams make sense -->
     <div id="backgroundColorResult" class="mt-2 md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       <!-- Add champ used, scoreline,win loss -->
-      <div id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
+      <div class='hide'id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
 
       <img class='championUsedPic' src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between">
         <% for(var i=0; i<5; i++) {%>       
-          <div class="flex infoContainer justify-between p-0 m-0">
+          <div class="flex border border-black infoContainer justify-between p-0 m-0">
             <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
             <li ><%= NameofPlayers[i] %>  </li> 
             <span><%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></span>
@@ -110,7 +108,7 @@
       </ul>
       <ul class="flex flex-col justify-between  ">
         <% for(var j=5; j<10; j++) {%> 
-               <div class="flex infoContainer justify-between p-0 m-0">
+               <div class="flex border border-black infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">        
           <li ><%= NameofPlayers[j] %>  </li>
           <span><%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></span> 
@@ -121,15 +119,15 @@
     </div>
 
     
-    <div id="backgroundColorResult2" class="md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
+    <div  id="backgroundColorResult2" class="mt-1 md:container md:mx-auto border border-black justify-right flex flex-row justify-between">
       
-      <div id="backgroundColor2"><%= matchesBackgroundColor[1] %></div>
+      <div class='hide' id="backgroundColor2"><%= matchesBackgroundColor[1] %></div>
       <!-- Add champ used, scoreline,win loss -->
       <img class="championUsedPic" src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between ">
         <% for(var i=10; i<15; i++) {%>       
-          <div class="flex infoContainer justify-between p-0 m-0">
+          <div class="flex border border-black infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[i]  %>" alt="">        
           <li ><%= NameofPlayers[i] %>  </li> 
           <span><%= kills[i] %>/<%= deaths[i] %>/<%= assists[i] %></span>
@@ -138,7 +136,7 @@
       </ul>
       <ul class="flex flex-col justify-between  ">
         <% for(var j=15; j<20; j++) {%> 
-               <div class="flex infoContainer justify-between p-0 m-0">
+               <div class="flex border border-black infoContainer justify-between p-0 m-0">
           <img class="champPics" src="<%=  champPicsUrl[j]  %>" alt="">        
           <li ><%= NameofPlayers[j] %>  </li> 
           <span><%= kills[j] %>/<%= deaths[j] %>/<%= assists[j] %></span>
@@ -163,5 +161,6 @@
 
       <script src="/js/tierPic.js"></script>
       <script src="/js/backgroundColor.js"></script>
+      <script src="/js/getUserScore.js"></script>
 </body>
 </html>

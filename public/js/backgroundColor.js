@@ -5,9 +5,9 @@ let backgroundColorResult=document.getElementById('backgroundColorResult').inner
 //console.log(backgroundColor)
 //console.log(backgroundColorResult)
 
-let backgroundColor2=document.getElementById('backgroundColor').innerHTML
-let backgroundColorResult2=document.getElementById('backgroundColorResult').innerHTML
-
+let backgroundColor2=document.getElementById('backgroundColor2').innerHTML
+let backgroundColorResult2=document.getElementById('backgroundColorResult2').innerHTML
+console.log(backgroundColor2)
 if(backgroundColor==='false'){
     console.log('false')
     document.getElementById('backgroundColorResult').style.backgroundColor="rgb(255, 108, 129,.5)";
@@ -19,14 +19,11 @@ if(backgroundColor==='false'){
 
 }
 if(backgroundColor2==='false'){
-document.getElementById('backgroundColorResult2').style.backgroundColor="rgb(255, 108, 129,.5)";
-     // specify the image path here
+    document.getElementById('backgroundColorResult2').style.backgroundColor="rgb(255, 108, 129,.5)";
+    
 
-}else{        document.getElementById('backgroundColorResult').style.backgroundColor="rgb(65, 113, 214,.5)";
-
-
-   
-
+}else{      
+      document.getElementById('backgroundColorResult2').style.backgroundColor="rgb(65, 113, 214,.5)";
 }
 
 
