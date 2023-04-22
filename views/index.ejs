@@ -96,6 +96,9 @@
       <div class='hide'id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
 
       <img class='championUsedPic' src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
+      <p><%= personalKills[0] %></p>
+      <p><%=  personalDeaths[0] %></p>
+      <p><%=  personalAssists[0] %></p>
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between">
         <% for(var i=0; i<5; i++) {%>       
@@ -124,6 +127,11 @@
       <div class='hide' id="backgroundColor2"><%= matchesBackgroundColor[1] %></div>
       <!-- Add champ used, scoreline,win loss -->
       <img class="championUsedPic" src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
+      <p><%= personalKills[1] %></p>
+      <p><%=  personalDeaths[1] %></p>
+      <p><%=  personalAssists[1] %></p>
+    
+     
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between ">
         <% for(var i=10; i<15; i++) {%>       

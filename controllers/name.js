@@ -62,6 +62,11 @@ module.exports = {
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
       await getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers)
       let champsPlayed=[]
+      let summonerPersonalScores=[]
+      let personalKills=[]
+      let personalDeaths=[]
+      let personalAssists=[]
+
       
       //console.log(champsPlayed)
       console.log(championName);
@@ -70,8 +75,11 @@ module.exports = {
       console.log(deaths)
       console.log(assists)
       console.log(matchesBackgroundColor)
+      
       await getUserChampPic(NameofPlayers,championName)
+      await getUserScore(matchListUrlFull1, routingRegion,NameofPlayers)
 
+  console.log(personalKills)
       //champPicsUrl=await getChampPics(championName)
       // console.log(participantsPicsID[0]['championName'])
       //get pics of champs
@@ -140,6 +148,30 @@ module.exports = {
           
         }     
       }
+      //Make function to get users personal score
+      async function getUserScore(matchListUrlFull1, routingRegion,NameofPlayers) {
+
+
+        for (let i = 0; i < matchListUrlFull1.length; i++) {
+          let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
+          const matchDataListFull = await fetch(matchDataList);
+          const matchDataListFull1 = await matchDataListFull.json();
+          summonerPersonalScores = matchDataListFull1.info;
+
+          //navigate through all the participants
+
+          for (let j = 0; j < 10; j++) {
+            if(req.body.SummonerName===NameofPlayers[j]){
+            personalKills.push(summonerPersonalScores['participants'][j]['kills'])
+            personalDeaths.push(summonerPersonalScores['participants'][j]['deaths'])
+            personalAssists.push(summonerPersonalScores['participants'][j]['assists'])
+
+
+          }
+          }
+        }
+        return summonerPersonalScores;
+      }
 
 
       async function getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers) {
@@ -165,7 +197,7 @@ module.exports = {
 
 
       res.render("index.ejs", {
-        name: name,matchesBackgroundColor:matchesBackgroundColor,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
+        name: name,matchesBackgroundColor:matchesBackgroundColor,personalKills:personalKills,personalDeaths:personalDeaths,personalAssists:personalAssists,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
         rankedInfoFull: rankedInfoFull, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
       });
     } catch (err) {
