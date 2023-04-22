@@ -69,7 +69,7 @@ module.exports = {
 
       
       //console.log(champsPlayed)
-      console.log(championName);
+      //console.log(championName);
       console.log(NameofPlayers)
       console.log(assists)
       console.log(deaths)
@@ -77,9 +77,10 @@ module.exports = {
       console.log(matchesBackgroundColor)
       
       await getUserChampPic(NameofPlayers,championName)
-      await getUserScore(matchListUrlFull1, routingRegion,NameofPlayers)
+      await getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers)
 
-  console.log(personalKills)
+
+
       //champPicsUrl=await getChampPics(championName)
       // console.log(participantsPicsID[0]['championName'])
       //get pics of champs
@@ -149,26 +150,29 @@ module.exports = {
         }     
       }
       //Make function to get users personal score
-      async function getUserScore(matchListUrlFull1, routingRegion,NameofPlayers) {
-
-
-        for (let i = 0; i < matchListUrlFull1.length; i++) {
-          let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
-          const matchDataListFull = await fetch(matchDataList);
-          const matchDataListFull1 = await matchDataListFull.json();
-          summonerPersonalScores = matchDataListFull1.info;
-
+      async function getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers) {
+        // for (let i = 0; i < matchListUrlFull1.length; i++) {
+        //   let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
+        //   const matchDataListFull = await fetch(matchDataList);
+        //   const matchDataListFull1 = await matchDataListFull.json();
+        //   summonerPersonalScores = matchDataListFull1.info;
           //navigate through all the participants
-
-          for (let j = 0; j < 10; j++) {
+          for (let j = 0; j < NameofPlayers.length; j++) {
             if(req.body.SummonerName===NameofPlayers[j]){
-            personalKills.push(summonerPersonalScores['participants'][j]['kills'])
-            personalDeaths.push(summonerPersonalScores['participants'][j]['deaths'])
-            personalAssists.push(summonerPersonalScores['participants'][j]['assists'])
+              //console.log(NameofPlayers[j])
+              //console.log(j)
+              personalKills.push(kills[j])
+              personalAssists.push(assists[j])
+              personalDeaths.push(deaths[j])
 
-
+               console.log(kills[j])
+               console.log(deaths[j])
+               console.log(assists[j])
+              //personalKills.push(summonerPersonalScores['participants'][j]['kills'])
+              //personalDeaths.push(summonerPersonalScores['participants'][j]['deaths'])
+              //personalAssists.push(summonerPersonalScores['participants'][j]['assists'])
           }
-          }
+          
         }
         return summonerPersonalScores;
       }
@@ -184,7 +188,7 @@ module.exports = {
           //navigate through all the participants and check if same user find if win or lost game
           for (let j = 0; j < 10; j++) {
             if(req.body.SummonerName===NameofPlayers[j]){
-            
+              console.log(participantsPicsID['participants'][j]['item0'])
               matchesBackgroundColor.push(participantsPicsID['participants'][j]['win'])
             }
           }
