@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-0c3fb8bd-04a2-4d89-8793-274bf22fad68";
+      let API_key = "RGAPI-25a1f4ea-2b64-4188-915f-1ab66b3d9e64";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
