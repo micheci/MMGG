@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-25a1f4ea-2b64-4188-915f-1ab66b3d9e64";
+      let API_key = "RGAPI-9c7d756c-ad77-4d77-b827-c8a3f40a00b0";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
@@ -168,6 +168,7 @@ module.exports = {
                console.log(kills[j])
                console.log(deaths[j])
                console.log(assists[j])
+               
               //personalKills.push(summonerPersonalScores['participants'][j]['kills'])
               //personalDeaths.push(summonerPersonalScores['participants'][j]['deaths'])
               //personalAssists.push(summonerPersonalScores['participants'][j]['assists'])
@@ -189,6 +190,11 @@ module.exports = {
           for (let j = 0; j < 10; j++) {
             if(req.body.SummonerName===NameofPlayers[j]){
               console.log(participantsPicsID['participants'][j]['item0'])
+               console.log(participantsPicsID['participants'][j]['item1'])
+               console.log(participantsPicsID['participants'][j]['item2'])
+               console.log(participantsPicsID['participants'][j]['item3'])
+               console.log(participantsPicsID['participants'][j]['item4'])
+               console.log(participantsPicsID['participants'][j]['item5'])
               matchesBackgroundColor.push(participantsPicsID['participants'][j]['win'])
             }
           }
