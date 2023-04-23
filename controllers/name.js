@@ -65,11 +65,14 @@ module.exports = {
       let items3=[]
       let items4=[]
       let items5=[]
+      let items6=[]
       let items0Pic=[]
       let items1Pic=[]
       let items2Pic=[]
       let items3Pic=[]
       let items4Pic=[]
+      let items5Pic=[]
+      let items6Pic=[]
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
       await getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers)
       await getItems(matchListUrlFull1, routingRegion,NameofPlayers)
@@ -83,8 +86,8 @@ module.exports = {
       getItemPics2()
       getItemPics3()
       getItemPics4()
-      //getItemPics5()
-      
+      getItemPics5()
+      getItemPics6()
 
       
       //console.log(champsPlayed)
@@ -218,6 +221,8 @@ module.exports = {
               items3.push(participantsPicsID['participants'][j]['item3'])
               items4.push(participantsPicsID['participants'][j]['item4'])
               items5.push(participantsPicsID['participants'][j]['item5'])
+              items6.push(participantsPicsID['participants'][j]['item6'])
+
 
               // console.log(participantsPicsID['participants'][j]['item0'])
               //  console.log(participantsPicsID['participants'][j]['item1'])
@@ -254,6 +259,16 @@ module.exports = {
           items4Pic.push(`http://ddragon.leagueoflegends.com/cdn/13.8.1/img/item/${items4[i]}.png`)
         }
       }
+      function getItemPics5(){
+        for(let i=0;i<items5.length;i++){
+          items5Pic.push(`http://ddragon.leagueoflegends.com/cdn/13.8.1/img/item/${items5[i]}.png`)
+        }
+      }
+      function getItemPics6(){
+        for(let i=0;i<items6.length;i++){
+          items6Pic.push(`http://ddragon.leagueoflegends.com/cdn/13.8.1/img/item/${items6[i]}.png`)
+        }
+      }
 
 
       async function getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers) {
@@ -280,7 +295,7 @@ module.exports = {
 
       res.render("index.ejs", {
         name: name,matchesBackgroundColor:matchesBackgroundColor,items0Pic:items0Pic,items1Pic:items1Pic,items2Pic:items2Pic,items3Pic:items3Pic,items4Pic:items4Pic,personalKills:personalKills,personalDeaths:personalDeaths,personalAssists:personalAssists,assists:assists,deaths:deaths,kills:kills,champsPlayed:champsPlayed, SummonerNameurlFull: SummonerNameurlFull, profilePicURL: profilePicURL,
-        rankedInfoFull: rankedInfoFull, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
+        rankedInfoFull: rankedInfoFull,items5Pic:items5Pic,items6Pic:items6Pic, NameofPlayers: NameofPlayers, champPicsUrl: champPicsUrl
       });
     } catch (err) {
       console.log(err);
