@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-9c7d756c-ad77-4d77-b827-c8a3f40a00b0";
+      let API_key = "RGAPI-3913c1b9-48cd-4966-bb7c-c5c23faf7b98";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
@@ -52,7 +52,7 @@ module.exports = {
       let NameofPlayers = [];
       NameofPlayers = await getNames(matchListUrlFull1, routingRegion, API_key, valueRegion);
       let participantsPicsID = [];
-      let participantsScores=[]
+      let ItemsPicsID=[]
       let championName = [];
       let assists=[]
       let deaths=[]
@@ -74,13 +74,16 @@ module.exports = {
       let items5Pic=[]
       let items6Pic=[]
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
+      ItemsPicsID=await getItems(matchListUrlFull1, routingRegion,NameofPlayers,items0)
       await getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers)
-      await getItems(matchListUrlFull1, routingRegion,NameofPlayers)
+     
+      //await getItems(matchListUrlFull1, routingRegion,NameofPlayers,items0)
       let champsPlayed=[]
       let summonerPersonalScores=[]
       let personalKills=[]
       let personalDeaths=[]
       let personalAssists=[]
+      //console.log(ItemsPicsID)
       getItemPics0()
       getItemPics1()
       getItemPics2()
@@ -92,16 +95,19 @@ module.exports = {
       
       //console.log(champsPlayed)
       //console.log(championName);
-      console.log(NameofPlayers)
-      console.log(assists)
-      console.log(deaths)
-      console.log(assists)
-      console.log(matchesBackgroundColor)
+      //console.log(NameofPlayers)\
+      
+      //console.log(assists)
+      //console.log(deaths)
+      //console.log(assists)
+      //console.log(matchesBackgroundColor)
       console.log(items0)
       console.log(items1)
       console.log(items2)
       console.log(items3)
       console.log(items4)
+      console.log(items5)
+      console.log(items6)
       
       await getUserChampPic(NameofPlayers,championName)
       await getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers)
@@ -174,6 +180,8 @@ module.exports = {
           
         }     
       }
+// fixing items
+      
       //Make function to get users personal score
       async function getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers) {
         // for (let i = 0; i < matchListUrlFull1.length; i++) {
@@ -190,9 +198,7 @@ module.exports = {
               personalAssists.push(assists[j])
               personalDeaths.push(deaths[j])
 
-               console.log(kills[j])
-               console.log(deaths[j])
-               console.log(assists[j])
+              
                
               //personalKills.push(summonerPersonalScores['participants'][j]['kills'])
               //personalDeaths.push(summonerPersonalScores['participants'][j]['deaths'])
@@ -204,36 +210,35 @@ module.exports = {
       }
 
       async function getItems(matchListUrlFull1, routingRegion,NameofPlayers) {
-        let itemURL='http://ddragon.leagueoflegends.com/cdn/13.8.1/img/item/1042.png'
+        
+        console.log(NameofPlayers)
         for (let i = 0; i < matchListUrlFull1.length; i++) {
           let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
           const matchDataListFull = await fetch(matchDataList);
           const matchDataListFull1 = await matchDataListFull.json();
-          participantsPicsID = matchDataListFull1.info;
-
+          ItemsPicsID = matchDataListFull1.info;
           //navigate through all the participants and check if same user find if win or lost game
-          for (let j = 0; j < 10; j++) {
-            if(req.body.SummonerName===NameofPlayers[j]){
-             
-              items0.push(participantsPicsID['participants'][j]['item0'])
-              items1.push(participantsPicsID['participants'][j]['item1'])
-              items2.push(participantsPicsID['participants'][j]['item2'])
-              items3.push(participantsPicsID['participants'][j]['item3'])
-              items4.push(participantsPicsID['participants'][j]['item4'])
-              items5.push(participantsPicsID['participants'][j]['item5'])
-              items6.push(participantsPicsID['participants'][j]['item6'])
-
-
-              // console.log(participantsPicsID['participants'][j]['item0'])
-              //  console.log(participantsPicsID['participants'][j]['item1'])
-              //  console.log(participantsPicsID['participants'][j]['item2'])
-              //  console.log(participantsPicsID['participants'][j]['item3'])
-              //  console.log(participantsPicsID['participants'][j]['item4'])
-              //  console.log(participantsPicsID['participants'][j]['item5'])
-              //  console.log(participantsPicsID['participants'][j]['item6'])
+          for (let j = 0; j <10; j++) {
+            if(req.body.SummonerName===ItemsPicsID['participants'][j]['summonerName']){
+              console.log(NameofPlayers[j])
+              items0.push(ItemsPicsID['participants'][j]['item0'])
+              items1.push(ItemsPicsID['participants'][j]['item1'])
+              items2.push(ItemsPicsID['participants'][j]['item2'])
+              items3.push(ItemsPicsID['participants'][j]['item3'])
+              items4.push(ItemsPicsID['participants'][j]['item4'])
+              items5.push(ItemsPicsID['participants'][j]['item5'])
+              items6.push(ItemsPicsID['participants'][j]['item6'])
+              console.log(ItemsPicsID['participants'][j]['championName'])
+               console.log(ItemsPicsID['participants'][j]['item0'])
+                console.log(ItemsPicsID['participants'][j]['item1'])
+                console.log(ItemsPicsID['participants'][j]['item2'])
+                console.log(ItemsPicsID['participants'][j]['item3'])
+                console.log(ItemsPicsID['participants'][j]['item4'])
+                console.log(ItemsPicsID['participants'][j]['item5'])
+                console.log(ItemsPicsID['participants'][j]['item6'])
             }
           }
-        }
+        }return ItemsPicsID
         
       }
       function getItemPics0(){
