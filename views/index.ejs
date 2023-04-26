@@ -25,7 +25,7 @@
     <form  action="/name/getSummonerName" method="POST">
       
 
-      <div class=" md:container md:mx-auto homeNav rounded border justify-center grid flex flex-row  border-white">
+      <div class=" md:container md:mx-auto homeNav rounded border justify-center grid flex flex-row mt-1 border-white">
         <select data-style="btn-info" name="selectpicker">
               <option name="brazil" value="br1.api.riotgames.com">Brazil</option>
               <option name="europe east" value="eun1.api.riotgames.com">EUN</option>
@@ -96,17 +96,26 @@
       <div class='hide'id="backgroundColor"><%= matchesBackgroundColor[0] %></div>
 
       <img class='championUsedPic' src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[0] + '.png'  %>" alt="champUsed">
-      <p><%= personalKills[0] %></p>
-      <p><%=  personalDeaths[0] %></p>
-      <p><%=  personalAssists[0] %></p>
-           
-<img src="<%=  items0Pic[0] %>" alt="">
+
+      <div class="scoreItems flex flex-col">
+        <div class="flex userScore flex-row">
+          <p><%= personalKills[0] %>/</p>
+          <p><%=  personalDeaths[0] %>/</p>
+          <p><%=  personalAssists[0] %></p>
+      </div>
+     <div class="itemsList">
+      <img src="<%=  items0Pic[0] %>" alt="">
 <img src="<%=  items1Pic[0] %>" alt="">
 <img src="<%=  items2Pic[0] %>" alt="">
 <img src="<%=  items3Pic[0] %>" alt="">
 <img src="<%=  items4Pic[0] %>" alt="">
 <img src="<%=  items5Pic[0] %>" alt="">
 <img src="<%=  items6Pic[0] %>" alt="">
+    </div>
+    </div>
+      
+           
+
 
       <div class="flex players pr-40">
       <ul class="flex flex-col justify-between">
@@ -136,19 +145,23 @@
       <div class='hide' id="backgroundColor2"><%= matchesBackgroundColor[1] %></div>
       <!-- Add champ used, scoreline,win loss -->
       <img class="championUsedPic" src="<%= 'http://ddragon.leagueoflegends.com/cdn/13.7.1/img/champion/' + champsPlayed[1] + '.png'  %>" alt="champUsed">
-      <p><%= personalKills[1] %></p>
-      <p><%=  personalDeaths[1] %></p>
-      <p><%=  personalAssists[1] %></p>
-
-     
-<img class='items' src="<%=  items0Pic[1] %>" alt="">
-<img src="<%=  items1Pic[1] %>" alt="">
-<img src="<%=  items2Pic[1] %>" alt="">
-<img src="<%=  items3Pic[1] %>" alt="">
-<img src="<%=  items4Pic[1] %>" alt="">
-<img src="<%=  items5Pic[1] %>" alt="">
-<img src="<%=  items6Pic[1] %>" alt="">
-
+      
+      <div class="scoreItems flex flex-col">
+        <div class="flex userScore flex-row">
+        <p><%= personalKills[1] %>/</p>
+        <p><%=  personalDeaths[1] %>/</p>
+        <p><%=  personalAssists[1] %></p>
+      </div>
+     <div class="itemsList">
+      <img class='items' src="<%=  items0Pic[1] %>" alt="">
+      <img class='items' src="<%=  items1Pic[1] %>" alt="">
+      <img class='items' src="<%=  items2Pic[1] %>" alt="">
+      <img class='items' src="<%=  items3Pic[1] %>" alt="">
+      <img class='items' src="<%=  items4Pic[1] %>" alt="">
+      <img class='items' src="<%=  items5Pic[1] %>" alt="">
+      <img class='items' src="<%=  items6Pic[1] %>" alt="">
+    </div>
+    </div>
 
 
 
