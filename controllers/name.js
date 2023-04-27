@@ -74,7 +74,7 @@ module.exports = {
       let items5Pic=[]
       let items6Pic=[]
       participantsPicsID = await getParticipantsPics(matchListUrlFull1, routingRegion, API_key, valueRegion);
-      ItemsPicsID=await getItems(matchListUrlFull1, routingRegion,NameofPlayers,items0)
+      ItemsPicsID=await getItems(matchListUrlFull1, routingRegion,NameofPlayers)
       await getWinLossColor(matchListUrlFull1, routingRegion,NameofPlayers)
      
       //await getItems(matchListUrlFull1, routingRegion,NameofPlayers,items0)
@@ -83,6 +83,10 @@ module.exports = {
       let personalKills=[]
       let personalDeaths=[]
       let personalAssists=[]
+          
+      await getUserChampPic(NameofPlayers,championName)
+      await getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers)
+
       //console.log(ItemsPicsID)
       getItemPics0()
       getItemPics1()
@@ -108,10 +112,7 @@ module.exports = {
       console.log(items4)
       console.log(items5)
       console.log(items6)
-      
-      await getUserChampPic(NameofPlayers,championName)
-      await getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers)
-
+  
 
 
       //champPicsUrl=await getChampPics(championName)
@@ -212,7 +213,7 @@ module.exports = {
 
       async function getItems(matchListUrlFull1, routingRegion,NameofPlayers) {
         
-        console.log(NameofPlayers)
+        
         for (let i = 0; i < matchListUrlFull1.length; i++) {
           let matchDataList = 'https://' + routingRegion + '/lol/match/v5/matches/' + matchListUrlFull1[i] + '?api_key=' + API_key;
           const matchDataListFull = await fetch(matchDataList);
