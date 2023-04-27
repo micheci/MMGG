@@ -6,7 +6,7 @@ module.exports = {
     try {
       let name = req.body.SummonerName;
       let valueRegion = req.body.selectpicker;
-      let API_key = "RGAPI-805b163c-bf4c-4e7c-89bd-cc4ffc4d3667";
+      let API_key = "RGAPI-941e13a7-9910-47d0-8a60-f5140b4e8358";
       let url = 'https://' + valueRegion + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=' + API_key;
 
       const SummonerNameurl1 = await fetch(url);
@@ -44,7 +44,7 @@ module.exports = {
       //get list of matches via ID
       //https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/l379PuyjqPIqK_wn8RoHVT2MfDSyWjChsLhlS0GP2aoj-XDDpvnfuQb0gKRfgkF2qagwKAze-G8UqA/ids?start=0&count=5&api_key=RGAPI-66efb83d-3934-4fcc-85d5-b34710bd3040 
       let matchListUrl = 'https://' + routingRegion + '/lol/match/v5/matches/by-puuid/' + SummonerNameurlFull.puuid + '/ids?start=0&count=2&api_key=' + API_key;
-      console.log(matchListUrl)
+      //console.log(matchListUrl)
       const matchListUrlFull = await fetch(matchListUrl);
       const matchListUrlFull1 = await matchListUrlFull.json();
       //console.log(matchListUrlFull1)
@@ -84,7 +84,7 @@ module.exports = {
       let personalDeaths=[]
       let personalAssists=[]
           
-      await getUserChampPic(NameofPlayers,championName)
+      let userChampPicExample=await getUserChampPic(NameofPlayers,championName)
       await getUserScore(matchListUrlFull1,kills, routingRegion,NameofPlayers)
 
       //console.log(ItemsPicsID)
@@ -161,7 +161,7 @@ module.exports = {
       }
 
       await getChampPics(championName);
-      console.log(championName)
+      //console.log(championName)
 
       async function getChampPics(championName) {
         for (let j = 0; j < 20; j++) {
@@ -173,9 +173,9 @@ module.exports = {
 // Make function to get users played champ CAN
 
       async function getUserChampPic(NameofPlayers,championName){
-        for(let i=0;i<NameofPlayers.length;i++){
+        for(let i=0;i<20;i++){
           if(NameofPlayers[i]===req.body.SummonerName){
-            
+            console.log(championName[i])
             champsPlayed.push(championName[i])
           
           }
