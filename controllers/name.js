@@ -20,7 +20,7 @@ module.exports = {
       //Summoner ID
       let id = SummonerNameurlFull.id;
       //get win/loss/tier/rank & LP
-      let winLost_url = 'https://' + valueRegion + '/lol/league/v4/entries/by-summoner/' + id + '?api_key=' + API_key;
+      let winLost_url = 'https://' + valueRegion + '/lol/league/v4/entries/by-summoner/' + id + '?api_key=' + 'RGAPI-3bc1fc54-2b32-4b22-89e7-446d844226d8';
       console.log(winLost_url);
       const rankedInfo = await fetch(winLost_url);
       const rankedInfoFull = await rankedInfo.json();
